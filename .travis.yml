@@ -1,19 +1,15 @@
 language: node_js
 
 node_js:
-  - "0.12"
-  - "4.0"
-  - "4"
-  - "5"
-  - "stable"
+  - "5.6"
 
-sudo: false
+sudo: true
 
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+services:
+  - docker
+
+before_install:
+  - docker pull sahsu/docker-ecs-cli
 
 script:
-  - npm run lint
-  - npm test
-  - npm run test-node
+  - docker run --rm sahsu/docker-ecs-cli help

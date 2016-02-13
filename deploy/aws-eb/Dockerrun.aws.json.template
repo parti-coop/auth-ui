@@ -1,0 +1,25 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "authentication": {
+    "bucket": "${APP_S3BUCKET}",
+    "key": ".dockercfg"
+  },
+  "containerDefinitions": [
+    {
+      "name": "parti-auth-ui",
+      "image": "partixyz/auth-ui:${APP_VERSION}",
+      "essential": true,
+      "memory": 768,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        },
+        {
+          "hostPort": 3030,
+          "containerPort": 3030
+        }
+      ] 
+    }
+  ]
+}
