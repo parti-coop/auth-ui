@@ -1,0 +1,11 @@
+.env
+.git
+.gitignore
+.editorconfig
+*.log
+*.md
+Dockerfile
+docker
+docker-compose.yml
+node_modules
+
