@@ -13,7 +13,6 @@ env:
     - APP_IAM_ROLE=arn:aws:iam::453285904053:instance-profile/aws-elasticbeanstalk-ec2-role
     - APP_KEY_PAIR=parti-tokyo
     - APP_SECURITY_GROUPS=ec2-parti-auth
-    - APP_VERSION=${TRAVIS_COMMIT::12}
     - DOCKER_REPO=partixyz/auth-ui
     - AUTH_UI_PORT=8080
 
@@ -27,12 +26,16 @@ sudo: true
 services:
   - docker
 
+before_install:
+  - sudo pip install awscli
+
 install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - npm install
 
 before_script:
+  - export APP_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
   - docker build -t $DOCKER_REPO:$APP_VERSION .
   - docker run -d -p $AUTH_UI_PORT:8080 $DOCKER_REPO:$APP_VERSION
   - sleep 5
@@ -44,3 +47,4 @@ after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - docker tag $DOCKER_REPO:$APP_VERSION $DOCKER_REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $DOCKER_REPO
+  - deploy/aws-eb/eb-deploy-update-env.bash

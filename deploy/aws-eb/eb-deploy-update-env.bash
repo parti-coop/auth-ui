@@ -15,8 +15,6 @@ script_dir() {
 SCRIPT_DIR=$( script_dir )
 APP_HOME=$( dirname $( dirname $SCRIPT_DIR ) )
 
-APP_VERSION=$( git describe --tags --long )
-
 if [ -z "$APP_VERSION" ]; then
     echo "APP_VERSION does not exist."
     exit 1
