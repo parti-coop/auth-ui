@@ -15,7 +15,7 @@ env:
     - APP_SECURITY_GROUPS=ec2-parti-auth
     - APP_VERSION=${TRAVIS_COMMIT::12}
     - DOCKER_REPO=partixyz/auth-ui
-    - PORT_AUTH_UI=8080
+    - AUTH_UI_PORT=8080
 
 language: node_js
 
@@ -27,9 +27,15 @@ sudo: true
 services:
   - docker
 
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+
 before_script:
   - docker build -t $DOCKER_REPO:$APP_VERSION .
-  - docker run -d -p $PORT_AUTH_UI:8080 $DOCKER_REPO:$APP_VERSION
+  - docker run -d -p $AUTH_UI_PORT:8080 $DOCKER_REPO:$APP_VERSION
+  - sleep 5
 
 script:
   - npm run test-e2e
