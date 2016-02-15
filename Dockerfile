@@ -1,4 +1,4 @@
-FROM node:5.6
+FROM node:5.6-slim
 
 ENV NODE_ENV production
 
@@ -9,8 +9,6 @@ WORKDIR /parti/auth-ui
 RUN npm install
 
 COPY . /parti/auth-ui
-
-RUN npm build
 
 EXPOSE 8080
 
