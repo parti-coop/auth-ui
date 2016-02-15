@@ -48,3 +48,8 @@ after_success:
   - docker tag $DOCKER_REPO:$APP_VERSION $DOCKER_REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $DOCKER_REPO
   - deploy/aws-eb/eb-deploy-update-env.bash
+
+notifications:
+  slack:
+    rooms:
+      secure: cAtWahPcfuejSd1SR/LVscP/2E3/zeFoqUfgheSBNoLyhz2R+cH2ez4raZABa7zEbRzZM7E9GklbokeUtEC9grx/MzKNBm3MurS826Y8ucv1F7zOZ/wNNTRKAObntR/Z8tl/oJVASeE6GLFG/H2fp8izEdtN7Mh8XsbLnCpwRBJd0gjwpaiSzEr1aO4MKXhF9jW5Q2mFUJ+nVUtWKmxbG4ceCerEP+cIx4ddw3L4JqPigdgZXD9PoUTV5JekkS7ZtgC+2lso5sJc47xo8kwjAaKxTy7x6RaNvd9oUzH1FdUvYOmZ7rTjD+iNN09cmkUqNWaL3QKGXN8f97qqYjzGgtVvlaY3235tAaf0CG4ZSrwjxWqTFPvEt2/S5bFqbdpNG3t9GISfi0l6hrojYvjnyIMk7+ZtuIrU5/3w6L4MzMg4oSTN/vfVT8L7BXDqtWqK/K7TRFdNmIhEdUkzF20aSZHuiChJvDYoQycQpvP+iiKXNrjtXMspEuBeUjNhHfuizOAd+yRnQdoaOfyKt9MCGqsveKFQJ55viFfH2C6nsZq9yz5fqCQWRfWz0JwQAs2Z5unRVcUFhgx4mvSLsiOVOoNYSrRqqIcM1chrVxfmvqQTHqzRHyZCJR6uOYeNGKHVEXWwUICshkgVgCEWXg8ov36TKU7mxPtfHl/VWBGrvyk=
