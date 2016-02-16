@@ -8,8 +8,10 @@ env:
   - APP_IAM_ROLE=arn:aws:iam::453285904053:instance-profile/aws-elasticbeanstalk-ec2-role
   - APP_KEY_PAIR=parti-tokyo
   - APP_SECURITY_GROUPS=ec2-parti-auth
-  - DOCKER_REPO=partixyz/auth-ui
+  - AUTH_UI_REPO=partixyz/auth-ui
+  - AUTH_API_REPO=partixyz/auth-api
   - AUTH_UI_PORT=8080
+  - AUTH_API_PORT=3030
   - secure: WlG4s1tyIx9mE8HrMGpUdsWAXAWCw5rMyiD+23IV0xipKgErGCxD7JJFbpNU83AoSzZIfdcDPGji0aQyY04J7JYNP39k6EgUMBT8KKfKzDncIepxKGufYQJixf0RAAnFtrhoJRnzJNpvyWWZBfK8grMWngcx/CjfjhWhPw7REo5u4e/XlDL3WzCghq7bntAiiooHNimATz4VhsI7l0dY6IpayKxEG0hV8Fwx3b6TP0gmqGunMpFGfm5TbVyayCrq/xY/1JU0zv71eSwo+fQpZkuFkbtpJDB5eFYaPWtoZk/Y+4h5Eq9W2d+S9qbUMxBVMrqxYoiJkbWnJGmZmZ8W19AMPC+leTuS4G1Kcdf0sezOrE7X8SdarPuOswQOt3rafgCfWJLYJ/DflqOCCHMt5j22ABm4QmCCniE8F2VdtkApqzDE/PVHLJ5jOBdspk0rVI+3CO3sRGKlvbKndMK1dW4zGI5An31ucg9oMNapGhemds1cY6ZM/LirUUkY7l3OdhHYMP+OYP0SWQDuC7ZOXZ5SlGkxAWGNqQfj2CgIMd0+TF0APRPkGieb5klIuz/nGXO7Bx1dWuV0Qu88Gb/y8bB++xn4JlLOMVVYH6M2ZsTjbPkh81PLIgwgcUFw4SCzywN0Kzh0GNoH9+E15pWc9L3u0K0uKU7kdehmB/gismU=
   - secure: ZKhl4v+1jXDhtoIUifcNAm4z7FDQuu1yWRLcGV/vHPMaXZDHIe/5td5iJ0OfzjzwHFHf+RQJ0MHxuksUmVKI7ZRU+80LL6paFLfmqiNnVKhCPmTjDLuZOjp0P4hLW8p3fliObGP40sZQzL6FUiwHN9Bv51x7purWw35o4NDOohg9ugm4txCG+dzfKq8CfZKTAU8+In9fwaFc2scwqEMTzG9YEQXOddrLgE0vHZBQ4XM7xCyjk5E8DkUGnFqw13fJHMHNh1fInB7q8qcxGySeLievKG0pTEvf+6zXx9OyWK/3zQlBpdzD1PdgW+ZAE30HqglHb/65wHpucf8d76xyXkxyRMFvTSXKgrV0q39F4x067HtHt7XFZGJ/VowjUwCy9FlODDHa9bWRem9sXQ9fRpBR37mbRn+Rldkwy2LF85qMcnjORj6hc5YKLbikFUn6AoLGAO1lhdUBABvurp1+SJNsaks5l2ExslHcj7Hk+rPfNwU3YWuxmqQzgYPsnYXIQAWl3rjBgrRlMedo+/7YZa0rtCjdvK1jYs4Z0vK7gFtJynKMPVrfqWjO6rr8QQzklmkKLnhsmKJGNXKobk/ver7RBgquGLszt4/tmxBNj/kTepBEOjbrpXSaKhKVBw6gj8nBD+b79URcJ5UgWhdkXAbVkU8qvBj6jIYPm6U22co=
   - secure: GE2HwarsbHZb8Lh9hqlwip1O5D0aDG3sTuFT1XOV14gB8PTE7epv5GHZL7covajzeMwPc/kkrrqlttatKS6dyWqNTl/I2H7xuivEluvzXDfjgCm9olFvj7M9JZ0M0/eeaU5+SnHsCUAHZE3Lq+QZ+JtMF4uvh1jtmHjtaDuh0dJ1fo1RCD06wR+e4fBOVDNC1hDKc5JjCDMdU1VwTDgZRt737SO5JDiOhP7F58G61W/N31bNCsGF7H98uQjAgLIJVL9mjbQbcuDQd2KtnSVTDkbPsJkvFQa98ldDWYO2tbKajUw5m4c85CqsAqxhY7Bx3NBtbYCofg6JwCb/fWnbAyW9TwyURtkHd6+nZxKxbXtyWKK8f17JsgwTa8nAcRrSJ+FIUEFKtwqrxobyONqgTIwZoLDXYd38iHoY2Kbd7hDkk7VP3H4Ar3X7wVj6O+tUo5m5yGSB4Bc9E7li84UO+R8gibvO+lcSkgqbhpmymt/AKYlNHEVmrYSYqhM3F7YbeSZKsZSt6sSgOGbST+WyzC+tzEIOENlXab4/MWgf6biiUfpAEYzBdY1IKE9hdJ6DCmFIDe4x3tM33mNCNSzel6kdTK+EgL1iebogMUk/yUfIAMTyW6Gdou3aTnDmTLK7TM5s0ML3PUKm3ykNsLEh83nawzrg4FZHeJSdoNrrEAo=
@@ -35,9 +37,16 @@ install:
   - npm install
 
 before_script:
-  - export APP_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
-  - docker build -t $DOCKER_REPO:$APP_VERSION .
-  - docker run -d -p $AUTH_UI_PORT:8080 $DOCKER_REPO:$APP_VERSION
+  - export AUTH_UI_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
+  - export AUTH_API_VERSION=0.1.0-1-ge38f351
+  - echo "building $AUTH_UI_REPO:$AUTH_UI_VERSION"
+  - docker build -t $AUTH_UI_REPO:$AUTH_UI_VERSION .
+  - docker pull $AUTH_API_REPO:$AUTH_API_VERSION
+  - export HOST=localhost
+  - export PORT=$AUTH_UI_PORT
+  - export APIHOST=localhost
+  - export APIPORT=$AUTH_API_PORT
+  - deploy/docker/docker-compose.bash up -d
   - sleep 5
 
 script:
@@ -45,8 +54,9 @@ script:
 
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - docker tag $DOCKER_REPO:$APP_VERSION $DOCKER_REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $DOCKER_REPO
+  - docker tag $AUTH_UI_REPO:$AUTH_UI_VERSION $AUTH_UI_REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $AUTH_UI_REPO
+  - export APP_VERSION=$AUTH_UI_VERSION
   - deploy/aws-eb/eb-deploy-update-env.bash
 
 notifications:

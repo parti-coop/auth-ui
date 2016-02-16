@@ -1,0 +1,9 @@
+auth-ui:
+  image: partixyz/auth-ui:${AUTH_UI_VERSION}
+  ports:
+    - ${AUTH_UI_PORT}:8080
+
+auth-api:
+  image: partixyz/auth-api:${AUTH_API_VERSION}
+  ports:
+    - ${AUTH_API_PORT}:3030
