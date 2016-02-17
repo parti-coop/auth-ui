@@ -35,6 +35,8 @@ if [ -z "$APP_S3BUCKET" ]; then
     exit 1
 fi
 
+set -e
+
 ${SCRIPT_DIR}/eb-create-app-version.bash \
 	--app-name ${APP_NAME} \
 	--app-version ${APP_VERSION} \
@@ -56,4 +58,6 @@ aws elasticbeanstalk update-environment \
 	  }
 	]'
 
-echo "Exit code: $?"
+if [[ $? -ne 0 ]] ; then
+  exit 1
+fi
