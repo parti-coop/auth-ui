@@ -116,6 +116,7 @@
     "compression": "^1.6.0",
     "concurrently": "^0.1.1",
     "express": "^4.13.3",
+    "express-healthcheck": "0.0.2",
     "express-session": "^1.12.1",
     "file-loader": "^0.8.5",
     "hoist-non-react-statics": "^1.0.3",

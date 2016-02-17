@@ -19,6 +19,20 @@ describe('UI server', () => {
 
     expect(url_equals(url, current_url)).to.be.true
   })
+
+  it.only('is up', done => {
+    let url = auth_ui_url('/health-check')
+
+    axios.get(url)
+      .then(response => {
+        expect(response.status).to.equal(200)
+        done()
+      })
+      .catch(err => {
+        console.log(err)
+        done(err)
+      })
+  })
 })
 
 describe('API server', () => {
@@ -27,7 +41,7 @@ describe('API server', () => {
 
     axios.get(url)
       .then(({ data }) => {
-        expect(data).to.eq('success')
+        expect(data).to.equal('success')
         done()
       })
       .catch(err => {
