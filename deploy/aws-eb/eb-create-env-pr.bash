@@ -14,7 +14,7 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 
-APP_VERSION=$( git describe --tags --long )
+export APP_VERSION=${APP_VERSION:-$( git describe --tags --long )}
 
 ${SCRIPT_DIR}/eb-create-env.bash \
 	--cname-prefix parti-auth-pr \
