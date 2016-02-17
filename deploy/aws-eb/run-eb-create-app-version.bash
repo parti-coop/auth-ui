@@ -14,10 +14,11 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 
-APP_VERSION=$( git describe --tags --long )
+APP_VERSION=${APP_VERSION:-$( git describe --tags --long ) }
+AUTH_API_VERSION=${AUTH_API_VERSION:-0.1.0-2-g3b958d3}
 
 ${SCRIPT_DIR}/eb-create-app-version.bash \
 	--app-name $APP_NAME \
 	--app-version $APP_VERSION \
+        --auth-api-version $AUTH_API_VERSION \
         --s3bucket $APP_S3BUCKET
-

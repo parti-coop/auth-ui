@@ -6,20 +6,28 @@
   },
   "containerDefinitions": [
     {
-      "name": "parti-auth-ui",
+      "name": "auth-ui",
       "image": "partixyz/auth-ui:${APP_VERSION}",
       "essential": true,
-      "memory": 768,
+      "memory": 256,
       "portMappings": [
         {
           "hostPort": 80,
           "containerPort": 8080
-        },
+        }
+      ]
+    },
+    {
+      "name": "auth-app",
+      "image": "partixyz/auth-api:${AUTH_API_VERSION}",
+      "essential": true,
+      "memory": 384,
+      "portMappings": [
         {
           "hostPort": 3030,
           "containerPort": 3030
         }
-      ] 
+      ]
     }
   ]
 }

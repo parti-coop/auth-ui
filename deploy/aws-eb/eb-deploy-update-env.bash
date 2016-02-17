@@ -56,3 +56,4 @@ aws elasticbeanstalk update-environment \
 	  }
 	]'
 
+echo "Exit code: $?"

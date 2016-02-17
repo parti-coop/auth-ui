@@ -3,16 +3,16 @@
 PROG=`basename $0`
 
 usage() {
-    echo "Usage: $PROG -n app-name -a app-version -p profile -s s3bucket" >&2
+    echo "Usage: $PROG -n app-name -a app-version -p auth-api-version -s s3bucket" >&2
 }
 
 getopt -T > /dev/null
 if [ $? -eq 4 ]; then
     # GNU enhanced getopt is available
-    ARGS=`getopt --name "$PROG" --long app-name:,app-version:,s3bucket: --options n:a:s: -- "$@"`
+    ARGS=`getopt --name "$PROG" --long app-name:,app-version:,auth-api-version:,s3bucket: --options n:a:p:s: -- "$@"`
 else
     # Original getopt is available (no long option names, no whitespace, no sorting)
-    ARGS=`getopt n:a:s: "$@"`
+    ARGS=`getopt n:a:p:s: "$@"`
 fi
 if [ $? -ne 0 ]; then
     usage
@@ -24,6 +24,7 @@ while [ $# -gt 0 ]; do
     case "$1" in
         -n | --app-name)    APP_NAME="$2"; shift;;
         -a | --app-version) APP_VERSION="$2"; shift;;
+        -p | --auth-api-version) AUTH_API_VERSION="$2"; shift;;
         -s | --s3bucket) APP_S3BUCKET="$2"; shift;;
         --)              shift; break;; # end of options
     esac
@@ -35,7 +36,7 @@ done
 #    echo "$PROG: argument: $ARG"
 #  done
 
-if [ -z "$APP_NAME" ] || [ -z "$APP_VERSION" ] || [ -z "$APP_S3BUCKET" ]; then
+if [ -z "$APP_NAME" ] || [ -z "$APP_VERSION" ] || [ -z "$APP_S3BUCKET" ] || [ -z "$AUTH_API_VERSION" ]; then
     usage
     exit 2
 fi
@@ -68,21 +69,17 @@ CHECK_VERSION=$(
 
 if [ -n "$CHECK_VERSION" ]; then
     echo "Version $APP_VERSION already exists."
-    echo "Delete Version ${APP_VERSION}."
-    aws elasticbeanstalk delete-application-version \
-        --application-name ${APP_NAME} \
-        --version-label ${APP_VERSION}
+    exit 1
+    # echo "Delete Version ${APP_VERSION}."
+    # aws elasticbeanstalk delete-application-version \
+    #     --application-name ${APP_NAME} \
+    #     --version-label ${APP_VERSION}
 fi
 
 TEMP_APP_SOURCE_DIR=$( mktemp -d 2>/dev/null || mktemp -d -t 'auth-ui.d' )
 TEMP_FILE=$( mktemp 2>/dev/null || mktemp -t 'auth-ui' )
 trap "rm -rf $APP_SOURCE_BUNDLE $TEMP_FILE $TEMP_APP_SOURCE_DIR" EXIT
 trap "exit 1" 1 2 3 13 15
-
-# TEMP_APP_SOURCE_DIR=${APP_HOME}/tmp.d
-# TEMP_FILE=${APP_HOME}/tmp
-# rm -rf $TEMP_APP_SOURCE_DIR $TEMP_FILE
-# mkdir -p $TEMP_APP_SOURCE_DIR
 
 (
   echo 'cat <<EndOfDoc'
