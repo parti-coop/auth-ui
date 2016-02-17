@@ -2,32 +2,37 @@ import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 chai.use(chaiAsPromised)
 
-import { equals as url_equals } from 'node-url-utils'
 import axios from 'axios'
+import url_equals from 'compare-urls'
 
-import config from '../../src/config';
+import { auth_ui_url, auth_api_url } from 'utils/auth-url'
 import { createBrowser } from './support/browser'
 import './support/setup-mocha'
 
 describe('UI server', () => {
   it('is up', function *() {
-    let port = process.env.AUTH_UI_PORT || config.port || 8080
-    let server_url = `http://${config.host}:${port}`
+    let url = auth_ui_url('/')
 
-    let url = yield createBrowser()
-      .goto(server_url)
+    let current_url = yield createBrowser()
+      .goto(url)
       .url()
 
-    expect(url_equals(url, server_url)).to.be.true
+    expect(url_equals(url, current_url)).to.be.true
   })
 })
 
 describe('API server', () => {
   it('is up', done => {
-    let port = process.env.AUTH_API_PORT || config.apiPort || 3030
-    let server_url = `http://${config.host}:${port}`
-    expect(
-      axios.get(server_url)
-    ).to.be.fulfilled.notify(done)
+    let url = auth_api_url('/health_check')
+
+    axios.get(url)
+      .then(({ data }) => {
+        expect(data).to.eq('success')
+        done()
+      })
+      .catch(err => {
+        console.log(err)
+        done(err)
+      })
   })
 })
