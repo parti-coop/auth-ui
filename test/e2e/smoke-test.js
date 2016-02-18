@@ -10,22 +10,11 @@ import { createBrowser } from './support/browser'
 import './support/setup-mocha'
 
 describe('UI server', () => {
-  it('is up', function *() {
-    let url = auth_ui_url('/')
-
-    let current_url = yield createBrowser()
-      .goto(url)
-      .url()
-
-    expect(url_equals(url, current_url)).to.be.true
-  })
-
-  it.only('is up', done => {
-    let url = auth_ui_url('/health-check')
-
-    axios.get(url)
+  it('is up', done => {
+    axios.get(auth_ui_url('/health-check'))
       .then(response => {
         expect(response.status).to.equal(200)
+        expect(response.data['api-host']).to.equals('success')
         done()
       })
       .catch(err => {
@@ -48,5 +37,16 @@ describe('API server', () => {
         console.log(err)
         done(err)
       })
+  })
+})
+
+describe('browser', () => {
+  it ('connects to auth-ui', function *() {
+    let url = auth_ui_url('/')
+    let current_url = yield createBrowser()
+      .goto(url)
+      .url()
+
+    expect(url_equals(url, current_url)).to.be.true
   })
 })
