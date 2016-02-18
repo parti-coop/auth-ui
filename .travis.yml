@@ -47,7 +47,7 @@ before_script:
   - export APIHOST=localhost
   - export APIPORT=$AUTH_API_PORT
   - deploy/docker/docker-compose.bash up -d
-  - sleep 5
+  - sleep 20
 
 script:
   - npm run test-e2e
