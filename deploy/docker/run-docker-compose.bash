@@ -12,15 +12,11 @@ script_dir() {
     printf "$( cd -P "$( dirname "$source" )" && pwd )"
 }
 
-if [ -z "$AUTH_UI_VERSION" ]; then
-    echo "AUTH_UI_VERSION does not exist."
-    exit 1
-fi
-export AUTH_UI_VERSION=${AUTH_UI_VERSION:-latest}
+export AUTH_UI_VERSION=${AUTH_UI_VERSION:-$( git describe --tags --long )}
 
 SCRIPT_DIR=$( script_dir )
 APP_HOME=$( dirname $( dirname $SCRIPT_DIR ) )
 
-export AUTH_API_VERSION=0.1.0-1-ge38f351
+export AUTH_API_VERSION=0.1.0-3-gcef8e18
 
 ${SCRIPT_DIR}/docker-compose.bash up

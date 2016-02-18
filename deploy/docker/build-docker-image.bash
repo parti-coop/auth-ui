@@ -14,5 +14,6 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 DOCKER_REPO=partixyz/auth-ui
+AUTH_UI_VERSION=${AUTH_UI_VERSION:-$( git describe --tags --long )}
 
-docker build -t ${DOCKER_REPO} ${SCRIPT_DIR}/../..
+docker build -t ${DOCKER_REPO}:${AUTH_UI_VERSION} ${SCRIPT_DIR}/../..
