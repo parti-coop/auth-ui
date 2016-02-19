@@ -8,8 +8,21 @@
     {
       "name": "auth-ui",
       "image": "partixyz/auth-ui:${APP_VERSION}",
+      "environment": [
+        {
+          "name": "APIHOST",
+          "value": "auth-api"
+        },
+        {
+          "name": "APIPORT",
+          "value": 3030
+        }
+      ],
       "essential": true,
       "memory": 256,
+      "links": [
+        "auth-api"
+      ],
       "portMappings": [
         {
           "hostPort": 80,
@@ -18,7 +31,7 @@
       ]
     },
     {
-      "name": "auth-app",
+      "name": "auth-api",
       "image": "partixyz/auth-api:${AUTH_API_VERSION}",
       "essential": true,
       "memory": 384,
