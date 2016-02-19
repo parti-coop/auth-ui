@@ -38,7 +38,7 @@ install:
 
 before_script:
   - export AUTH_UI_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
-  - export AUTH_API_VERSION=0.1.0-1-ge38f351
+  - export AUTH_API_VERSION=0.1.0-3-gcef8e18
   - echo "building $AUTH_UI_REPO:$AUTH_UI_VERSION"
   - docker build -t $AUTH_UI_REPO:$AUTH_UI_VERSION .
   - docker pull $AUTH_API_REPO:$AUTH_API_VERSION
@@ -47,7 +47,7 @@ before_script:
   - export APIHOST=localhost
   - export APIPORT=$AUTH_API_PORT
   - deploy/docker/docker-compose.bash up -d
-  - sleep 20
+  - sleep 10
 
 script:
   - npm run test-e2e
