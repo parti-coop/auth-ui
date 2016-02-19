@@ -38,7 +38,7 @@ install:
 
 before_script:
   - export AUTH_UI_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
-  - export AUTH_API_VERSION=0.1.0-3-gcef8e18
+  - export AUTH_API_VERSION=0.1.1-0-g3b958d3
   - echo "building $AUTH_UI_REPO:$AUTH_UI_VERSION"
   - docker build -t $AUTH_UI_REPO:$AUTH_UI_VERSION .
   - docker pull $AUTH_API_REPO:$AUTH_API_VERSION
