@@ -12,4 +12,4 @@ COPY . /parti/auth-ui
 
 EXPOSE 8080
 
-CMD npm start
+CMD npm run start-prod

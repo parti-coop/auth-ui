@@ -13,7 +13,9 @@ function applyHealthCheck(app) {
       { 'api-host': 'success' }
     ),
     test: done => {
-      axios.get(auth_api_url('/health_check'))
+      let auth_url = auth_api_url('/health_check')
+      console.log(`Checking ${auth_url}`)
+      axios.get(auth_url)
         .then(({ data }) => {
           if (data == 'success') {
             done()
