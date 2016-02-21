@@ -26,7 +26,7 @@ describe('UI server', () => {
 
 describe('API server', () => {
   it('is up', done => {
-    let url = auth_api_url('/health_check')
+    const url = auth_api_url('/health_check')
 
     axios.get(url)
       .then(({ data }) => {
@@ -41,9 +41,9 @@ describe('API server', () => {
 })
 
 describe('browser', () => {
-  it ('connects to auth-ui', function *() {
-    let url = auth_ui_url('/')
-    let current_url = yield createBrowser()
+  it ('connects to auth-ui', function*() {
+    const url = auth_ui_url('/')
+    const current_url = yield createBrowser()
       .goto(url)
       .url()
 

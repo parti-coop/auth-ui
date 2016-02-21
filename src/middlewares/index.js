@@ -13,11 +13,11 @@ function applyHealthCheck(app) {
       { 'api-host': 'success' }
     ),
     test: done => {
-      let auth_url = auth_api_url('/health_check')
+      const auth_url = auth_api_url('/health_check')
       console.log(`Checking ${auth_url}`)
       axios.get(auth_url)
         .then(({ data }) => {
-          if (data == 'success') {
+          if (data === 'success') {
             done()
           } else {
             done('health_check auth-api failed')
@@ -26,8 +26,8 @@ function applyHealthCheck(app) {
         .catch(err => {
           done(err)
         })
-      }
-    }))
-  }
+    }
+  }))
+}
 
 export default applyMiddlewares
