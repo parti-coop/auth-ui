@@ -1,9 +1,10 @@
 *.iml
 .idea/
 .projections.json
-node_modules/
 dist/
+node_modules/
+npm-debug.log
+tags
 webpack-assets.json
 webpack-stats.json
-npm-debug.log
 /.env

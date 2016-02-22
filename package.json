@@ -28,6 +28,7 @@
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
+    "ctags": "find . -type f -iregex '.*\\.js$' -not -path \"./node_modules/*\" -exec jsctags {} -f \\; | sed '/^$/d' | sort > tags",
     "postinstall": "npm run build",
     "lint": "eslint -c .eslintrc src api test",
     "start-dev": "better-npm-run start-dev",
