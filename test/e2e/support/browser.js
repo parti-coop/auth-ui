@@ -1,10 +1,8 @@
 import Nightmare from 'nightmare'
 
-export const createBrowser = () => (
-  Nightmare({
+export function createBrowser() {
+  return Nightmare({
     show: false,
     waitTimeout: 5 * 1000
   })
-)
-
-export default Nightmare
+}

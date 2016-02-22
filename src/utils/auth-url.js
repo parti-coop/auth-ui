@@ -9,3 +9,6 @@ export function auth_api_url(path) {
   return normalize_url(`http://${config.apiHost}:${config.apiPort}${path}`)
 }
 
+export function authorizations_url() {
+  return auth_ui_url('/authorizations')
+}

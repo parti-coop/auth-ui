@@ -35,7 +35,7 @@ app.use(Express.static(path.join(__dirname, '..', 'static')))
 
 applyMiddleware(app)
 
-app.use('/ws', (req, res) => {
+app.use('/ws', (req, _res) => {
   console.log(`Issue #19: find out how to stop this request(${req.originalUrl})`)
   // proxy.web(req, res, {target: targetUrl + '/ws'})
 })
