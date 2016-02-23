@@ -8,3 +8,10 @@ export function user_should_be_asked_to_provide_credential(browser) {
     })
   })
 }
+
+export function user_exists(_client) {
+  return {
+    email: 'user-id@email.com',
+    password: 'Passw0rd!'
+  }
+}

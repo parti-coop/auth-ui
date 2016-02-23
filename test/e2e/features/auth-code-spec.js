@@ -2,9 +2,14 @@
 import { describe as feature, describe as context } from 'mocha'
 import { createBrowser } from '../support/browser'
 import { registered_client_exist } from '../support/features/client'
-import { request_auth_code } from '../support/features/auth-code'
-import { user_should_be_asked_to_provide_credential } from '../support/features/user'
-
+import {
+  auth_code_is_requested,
+  auth_code_should_be_granted,
+  submit_user_credential
+} from '../support/features/auth-code'
+import {
+  user_exists
+} from '../support/features/user'
 import '../support/setup-mocha'
 
 feature('Grant authorization code', () => {
@@ -18,12 +23,14 @@ feature('Grant authorization code', () => {
   })
 
   context('Client redirects user to authorization endpoint', () => {
-    scenario('User is asked to provide credential', function *() {
+    scenario('User submits credential then authorization code is granted', function *() {
       const client = yield registered_client_exist()
+      const user = yield user_exists(client)
+      yield auth_code_is_requested(browser, {client})
 
-      yield request_auth_code(browser, { client })
+      yield submit_user_credential(browser, {user})
 
-      yield user_should_be_asked_to_provide_credential(browser)
+      yield auth_code_should_be_granted(browser)
     })
   })
 })
