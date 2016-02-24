@@ -42,7 +42,7 @@ before_script:
 - deploy/docker/docker-compose.bash up -d
 - sleep 10
 script:
-- npm run test-e2e
+- npm test
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - docker tag $AUTH_UI_REPO:$AUTH_UI_VERSION $AUTH_UI_REPO:travis-$TRAVIS_BUILD_NUMBER
