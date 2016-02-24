@@ -1,30 +1,30 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
-import Helmet from 'react-helmet';
-import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { InfoBar } from 'components';
-import { routeActions } from 'react-router-redux';
-import config from '../../config';
-import { asyncConnect } from 'redux-async-connect';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { IndexLink } from 'react-router'
+import { LinkContainer } from 'react-router-bootstrap'
+import Navbar from 'react-bootstrap/lib/Navbar'
+import Nav from 'react-bootstrap/lib/Nav'
+import NavItem from 'react-bootstrap/lib/NavItem'
+import Helmet from 'react-helmet'
+import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info'
+import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth'
+import { InfoBar } from 'components'
+import { routeActions } from 'react-router-redux'
+import config from '../../config'
+import { asyncConnect } from 'redux-async-connect'
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
-    const promises = [];
+    const promises = []
 
     if (!isInfoLoaded(getState())) {
-      promises.push(dispatch(loadInfo()));
+      promises.push(dispatch(loadInfo()))
     }
     if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
+      promises.push(dispatch(loadAuth()))
     }
 
-    return Promise.all(promises);
+    return Promise.all(promises)
   }
 }])
 @connect(
@@ -45,21 +45,21 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.props.pushState('/loginSuccess');
+      this.props.pushState('/loginSuccess')
     } else if (this.props.user && !nextProps.user) {
       // logout
-      this.props.pushState('/');
+      this.props.pushState('/')
     }
   }
 
   handleLogout = (event) => {
-    event.preventDefault();
-    this.props.logout();
+    event.preventDefault()
+    this.props.logout()
   };
 
   render() {
-    const {user} = this.props;
-    const styles = require('./App.scss');
+    const {user} = this.props
+    const styles = require('./App.scss')
 
     return (
       <div className={styles.app}>
@@ -124,6 +124,6 @@ export default class App extends Component {
           href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
         </div>
       </div>
-    );
+    )
   }
 }
