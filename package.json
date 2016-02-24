@@ -167,6 +167,7 @@
     "eslint-plugin-import": "^0.8.0",
     "eslint-plugin-react": "^3.5.0",
     "extract-text-webpack-plugin": "^0.9.1",
+    "factory-girl": "^2.2.3",
     "font-awesome": "^4.4.0",
     "font-awesome-webpack": "0.0.4",
     "json-loader": "^0.5.4",
