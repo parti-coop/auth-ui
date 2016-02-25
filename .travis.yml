@@ -31,17 +31,27 @@ install:
 - npm install
 before_script:
 - export AUTH_UI_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
-- export AUTH_API_VERSION=0.1.1-0-g3b958d3
+- export AUTH_API_VERSION=0.1.1-11-ge884ca6
 - echo "building $AUTH_UI_REPO:$AUTH_UI_VERSION"
 - docker build -t $AUTH_UI_REPO:$AUTH_UI_VERSION .
-- docker pull $AUTH_API_REPO:$AUTH_API_VERSION
 - export HOST=localhost
 - export PORT=$AUTH_UI_PORT
-- export APIHOST=localhost
+- export APIHOST=auth-api
 - export APIPORT=$AUTH_API_PORT
-- deploy/docker/docker-compose.bash up -d
-- sleep 10
+- export RAILS_ENV=production
+- export DB_HOST=db
+- export DB_PORT=5432
+- export DB_USER=postgres
+- docker pull postgres:9.4
+- docker run --name db -d postgres:9.4
+- docker pull $AUTH_API_REPO:$AUTH_API_VERSION
+- export SECRET_KEY_BASE=`docker run --rm $AUTH_API_REPO:$AUTH_API_VERSION bin/rake secret`
+- docker run --rm --link=db -e RAILS_ENV -e DB_HOST -e DB_PORT -e DB_USER -e SECRET_KEY_BASE $AUTH_API_REPO:$AUTH_API_VERSION bin/rake db:setup
+- docker run --name $APIHOST --link=db -e RAILS_ENV -e DB_HOST -e DB_PORT -e DB_USER -e SECRET_KEY_BASE -p $AUTH_API_PORT:$AUTH_API_PORT -d $AUTH_API_REPO:$AUTH_API_VERSION
+- docker run --name auth-ui --link=$APIHOST -e HOST -e PORT -e APIHOST -e APIPORT -p $AUTH_UI_PORT:$AUTH_UI_PORT -d $AUTH_UI_REPO:$AUTH_UI_VERSION
+- sleep 5
 script:
+- export APIHOST=localhost
 - npm test
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
