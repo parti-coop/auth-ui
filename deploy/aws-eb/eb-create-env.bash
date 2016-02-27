@@ -60,11 +60,6 @@ if [ -n "$AWS_PROFILE" ]; then
     OPTIONAL_ARGS="${OPTIONAL_ARGS} --profile=${AWS_PROFILE}"
 fi
 
-#KEY_PAIR=momentale-tokyo
-#IAM_ROLE=arn:aws:iam::298512235455:instance-profile/aws-elasticbeanstalk-ec2-role
-#SECURITY_GROUPS=momentale-eb
-#ENV_TYPE=SingleInstance
-
 OPTION_SETTINGS=
 if [ "x$ENV_TYPE" = "xSingleInstance" ]; then
 OPTION_SETTINGS=$( cat << EndOfDoc
