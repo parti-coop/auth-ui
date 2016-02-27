@@ -147,7 +147,7 @@ aws elasticbeanstalk create-environment \
 	--application-name ${APP_NAME} \
 	--version-label ${APP_VERSION} \
 	--environment-name ${ENV_NAME} \
-	--solution-stack-name "64bit Amazon Linux 2015.09 v2.0.7 running Multi-container Docker 1.9.1 (Generic)" \
+        --solution-stack-name "64bit Amazon Linux 2015.09 v2.0.8 running Multi-container Docker 1.9.1 (Generic)" \
 	--option-settings "$OPTION_SETTINGS" \
 	$OPTIONAL_ARGS
 
