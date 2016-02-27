@@ -58,7 +58,7 @@ after_success:
 - docker tag $AUTH_UI_REPO:$AUTH_UI_VERSION $AUTH_UI_REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $AUTH_UI_REPO
 - export APP_VERSION=$AUTH_UI_VERSION
-# - deploy/aws-eb/eb-deploy-update-env.bash
+- deploy/aws-eb/eb-deploy-update-env.bash
 notifications:
   slack:
     rooms:
