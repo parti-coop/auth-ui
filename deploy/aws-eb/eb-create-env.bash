@@ -111,6 +111,78 @@ EndOfDoc
 )
 fi
 
+if [ -n "$SECRET_KEY_BASE" ]; then
+OPTION_SETTINGS=$( cat << EndOfDoc
+  ${OPTION_SETTINGS},
+  {
+    "Namespace":"aws:elasticbeanstalk:application:environment",
+    "OptionName":"SECRET_KEY_BASE",
+    "Value":"${SECRET_KEY_BASE}"
+  }
+EndOfDoc
+)
+fi
+
+if [ -n "$DB_HOST" ]; then
+OPTION_SETTINGS=$( cat << EndOfDoc
+  ${OPTION_SETTINGS},
+  {
+    "Namespace":"aws:elasticbeanstalk:application:environment",
+    "OptionName":"DB_HOST",
+    "Value":"${DB_HOST}"
+  }
+EndOfDoc
+)
+fi
+
+if [ -n "$DB_PORT" ]; then
+OPTION_SETTINGS=$( cat << EndOfDoc
+  ${OPTION_SETTINGS},
+  {
+    "Namespace":"aws:elasticbeanstalk:application:environment",
+    "OptionName":"DB_PORT",
+    "Value":"${DB_PORT}"
+  }
+EndOfDoc
+)
+fi
+
+if [ -n "$DB_USER" ]; then
+OPTION_SETTINGS=$( cat << EndOfDoc
+  ${OPTION_SETTINGS},
+  {
+    "Namespace":"aws:elasticbeanstalk:application:environment",
+    "OptionName":"DB_USER",
+    "Value":"${DB_USER}"
+  }
+EndOfDoc
+)
+fi
+
+if [ -n "$DB_PASSWORD" ]; then
+OPTION_SETTINGS=$( cat << EndOfDoc
+  ${OPTION_SETTINGS},
+  {
+    "Namespace":"aws:elasticbeanstalk:application:environment",
+    "OptionName":"DB_PASSWORD",
+    "Value":"${DB_PASSWORD}"
+  }
+EndOfDoc
+)
+fi
+
+if [ -n "$AUTH_UI_HOST" ]; then
+OPTION_SETTINGS=$( cat << EndOfDoc
+  ${OPTION_SETTINGS},
+  {
+    "Namespace":"aws:elasticbeanstalk:application:environment",
+    "OptionName":"HOST",
+    "Value":"${AUTH_UI_HOST}"
+  }
+EndOfDoc
+)
+fi
+
 OPTION_SETTINGS=$( cat << EndOfDoc
 [
   ${OPTION_SETTINGS},

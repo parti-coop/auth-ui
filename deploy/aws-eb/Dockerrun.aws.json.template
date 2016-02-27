@@ -24,6 +24,10 @@
         {
           "name": "APIPORT",
           "value": 3030
+        },
+        {
+          "name": "PORT",
+          "value": 8080
         }
       ],
       "essential": true,
@@ -41,6 +45,12 @@
     {
       "name": "auth-api",
       "image": "partixyz/auth-api:${AUTH_API_VERSION}",
+      "environment": [
+        {
+          "name": "RAILS_ENV",
+          "value": "production"
+        }
+      ],
       "essential": true,
       "memory": 384,
       "mountPoints": [
