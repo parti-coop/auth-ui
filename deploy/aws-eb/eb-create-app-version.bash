@@ -93,8 +93,10 @@ mkdir ${TEMP_APP_SOURCE_DIR}/.ebextensions
 (
 cat <<EndOfDoc
 container_commands:
-  01_write_leader_marker:
-    command: touch /tmp/is_leader
+  01_create_dir_volume:
+    command: mkdir -p /var/app/volume/shared
+  02_write_leader_marker:
+    command: touch /var/app/volume/shared/is_leader
     leader_only: true
 EndOfDoc
 ) > ${TEMP_APP_SOURCE_DIR}/.ebextensions/01_container_commands.config

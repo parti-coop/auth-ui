@@ -4,6 +4,14 @@
     "bucket": "${APP_S3BUCKET}",
     "key": ".dockercfg"
   },
+  "volumes": [
+    {
+      "name": "shared-volume",
+      "host": {
+        "sourcePath": "/var/app/volume/shared"
+      }
+    }
+  ],
   "containerDefinitions": [
     {
       "name": "auth-ui",
@@ -35,6 +43,13 @@
       "image": "partixyz/auth-api:${AUTH_API_VERSION}",
       "essential": true,
       "memory": 384,
+      "mountPoints": [
+        {
+          "sourceVolume": "shared-volume",
+          "containerPath": "/volume/shared",
+          "readOnly": true
+        }
+      ],
       "portMappings": [
         {
           "hostPort": 3030,
