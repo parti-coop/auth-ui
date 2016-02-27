@@ -88,6 +88,17 @@ trap "exit 1" 1 2 3 13 15
 ) > $TEMP_FILE
 . $TEMP_FILE > ${TEMP_APP_SOURCE_DIR}/Dockerrun.aws.json
 
+mkdir ${TEMP_APP_SOURCE_DIR}/.ebextensions
+
+(
+cat <<EndOfDoc
+container_commands:
+  01_write_leader_marker:
+    command: touch /tmp/is_leader
+    leader_only: true
+EndOfDoc
+) > ${TEMP_APP_SOURCE_DIR}/.ebextensions/01_container_commands.config
+
 cd ${TEMP_APP_SOURCE_DIR} && zip -r ${APP_SOURCE_BUNDLE} .
 
 aws s3 cp ${APP_SOURCE_BUNDLE} s3://${APP_S3BUCKET}
