@@ -15,7 +15,7 @@ script_dir() {
 SCRIPT_DIR=$( script_dir )
 
 APP_VERSION=${APP_VERSION:-$( git describe --tags --long ) }
-AUTH_API_VERSION=${AUTH_API_VERSION:-0.1.1-11-ge884ca6}
+AUTH_API_VERSION=${AUTH_API_VERSION:-0.1.1-17-gd4fe493}
 
 ${SCRIPT_DIR}/eb-create-app-version.bash \
 	--app-name $APP_NAME \

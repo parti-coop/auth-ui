@@ -17,6 +17,6 @@ export AUTH_UI_VERSION=${AUTH_UI_VERSION:-$( git describe --tags --long )}
 SCRIPT_DIR=$( script_dir )
 APP_HOME=$( dirname $( dirname $SCRIPT_DIR ) )
 
-export AUTH_API_VERSION=0.1.1-0-g3b958d3
+export AUTH_API_VERSION=0.1.1-17-gd4fe493
 
 ${SCRIPT_DIR}/docker-compose.bash up
