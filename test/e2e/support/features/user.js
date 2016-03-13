@@ -15,7 +15,7 @@ export function user_count() {
 }
 
 export function user_does_not_exist(attrs) {
-  return api_test_client.get('/v1/test/users', { params : attrs }).then(res => {
+  return api_test_client.get('/v1/test/users', { params: attrs }).then(res => {
     if (res.data.length > 0) {
       return api_test_client.delete(`/v1/test/users/${res.data[0].id}`)
     }

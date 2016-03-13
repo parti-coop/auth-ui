@@ -13,9 +13,8 @@ export const api_test_client = {
         this.token = res.data
         return get_with_token(this.token, path, options)
       })
-    } else {
-      return get_with_token(this.token, path, options)
     }
+    return get_with_token(this.token, path, options)
   },
 
   post(path, data, options = {}) {
@@ -24,9 +23,8 @@ export const api_test_client = {
         this.token = res.data
         return post_with_token(this.token, path, data, options)
       })
-    } else {
-      return post_with_token(this.token, path, data, options)
     }
+    return post_with_token(this.token, path, data, options)
   },
 
   delete(path, options = {}) {
@@ -35,9 +33,8 @@ export const api_test_client = {
         this.token = res.data
         return delete_with_token(this.token, path, options)
       })
-    } else {
-      return delete_with_token(this.token, path, options)
     }
+    return delete_with_token(this.token, path, options)
   }
 }
 
@@ -82,11 +79,11 @@ function basic_auth_credential(id, secret) {
 }
 
 function www_form_urlencoded(data) {
-  let str = []
-  for(var p in data) {
+  const str = []
+  for (const p in data) {
     if (data.hasOwnProperty(p) && data[p]) {
       str.push(encodeURIComponent(p) + '=' + encodeURIComponent(data[p]))
     }
   }
-  return str.join('&');
+  return str.join('&')
 }

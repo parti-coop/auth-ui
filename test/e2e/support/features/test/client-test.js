@@ -6,18 +6,19 @@ chai.use(chai_as_promised)
 import { registered_client_exist } from '../client'
 
 describe('registered_client_exist', () => {
-  it('returns valid client model', () => {
+  it('returns valid client model', done => {
     registered_client_exist().then(client => {
       expect(client.client_id).to.exist
-      expect(client.redirect_uris).to.all.satisfy(uri => {
-        return parse_url(uri)['host']
+      client.redirect_uris.forEach(uri => {
+        expect(parse_url(uri).host).to.not.empty
       })
+      done()
     }).catch(err => {
       done(err)
     })
   })
 
-  it('builds with overriding attributes', (done) => {
+  it('builds with overriding attributes', done => {
     registered_client_exist({
       client_id: 'overrided-client-id',
       redirect_uris: ['http://overrided.url.com']
