@@ -128,6 +128,7 @@
     "normalize-url": "^1.4.0",
     "piping": "^0.3.0",
     "pretty-error": "^1.2.0",
+    "ramda": "^0.19.1",
     "react": "^0.14.2",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.1",
