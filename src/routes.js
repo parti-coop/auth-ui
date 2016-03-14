@@ -5,6 +5,7 @@ import {
   Home,
   About,
   SignInView,
+  SignUpView,
   NotFound
 } from 'containers'
 
@@ -18,6 +19,7 @@ export default () => {
       <IndexRoute component={Home}/>
       { /* Routes */ }
       <Route path="authorizations" component={SignInView}/>
+      <Route path="sign-up" component={SignUpView}/>
       <Route path="about" component={About}/>
 
       { /* Catch all route */ }

@@ -31,10 +31,13 @@ export default class App extends Component {
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
               <LinkContainer to="/authorizations">
-                <NavItem eventKey={3}>Authorizations</NavItem>
+                <NavItem eventKey={1}>Authorizations</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/sign-up">
+                <NavItem eventKey={2}>Sign Up</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={4}>About Us</NavItem>
+                <NavItem eventKey={3}>About Us</NavItem>
               </LinkContainer>
             </Nav>
             <Nav navbar pullRight>
