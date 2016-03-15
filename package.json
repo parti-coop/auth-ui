@@ -38,7 +38,7 @@
     "start-dev-api": "better-npm-run start-dev-api",
     "test": "npm run test-node && npm run test-e2e",
     "test-e2e": "npm run test-e2e-with -- test/e2e && npm run test-e2e-with -- --recursive test/e2e/features",
-    "test-e2e-with": "NODE_PATH=./src PORT=8080 APIPORT=3030 npm run mocha -- -t 15000 --ui bdd",
+    "test-e2e-with": "PORT=8080 APIPORT=3030 npm run mocha -- -t 15000 --ui bdd",
     "test-node": "npm run mocha -- $(find test/* -type d -name test) --recursive --compilers js:babel-core/register",
     "test-node-api": "npm run mocha $(find api -name '*-test.js')",
     "test-node-api-watch": "npm run test-node-api -- --watch",

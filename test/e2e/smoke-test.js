@@ -5,7 +5,7 @@ chai.use(chaiAsPromised)
 import axios from 'axios'
 import url_equals from 'compare-urls'
 
-import { auth_ui_url, auth_api_url } from 'utils/auth-url'
+import { auth_ui_url, auth_api_url } from '../../src/utils/auth-url'
 import { createBrowser } from './support/browser'
 import './support/setup-mocha'
 

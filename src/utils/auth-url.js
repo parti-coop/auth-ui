@@ -1,5 +1,5 @@
 import normalize_url from 'normalize-url'
-import config from 'config'
+import config from '../config'
 
 export function auth_ui_url(path) {
   return normalize_url(`http://${config.host}:${config.port}${path}`)
