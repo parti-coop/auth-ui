@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import { describe as feature, describe as context } from 'mocha'
 import '../support/setup-mocha'
 
@@ -34,6 +35,19 @@ feature('Signs up', () => {
     yield user_should_see_sign_up_confirmation_sent_page(browser)
     yield user_should_exist({
       email: 'user@email.com'
+    })
+  })
+
+  scenario('User sees message when password is too short', function *() {
+    yield user_does_not_exist({
+      email: 'user@email.com'
+    })
+    yield sign_up(browser, {
+      email: 'user@email.com',
+      password: 'a'
+    })
+    yield user_should_see_message(browser, message => {
+      expect(message).to.match(/Password is too short/)
     })
   })
 })

@@ -3,6 +3,7 @@ import R from 'ramda'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Col, Row } from 'react-bootstrap'
+import { actions as notifActions } from 're-notif'
 
 import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import { api_client } from '../../helpers/api-client'
@@ -15,7 +16,10 @@ const onSignUpSubmit = fields => dispatch => {
     return dispatch(push('/sign-up-confirmation-sent'))
   })
   .catch(err => {
-    console.log(err)
+    const messages = R.pathOr([err.statusText], ['data', 'errors', 'full_messages'], err)
+    messages.forEach(message => {
+      dispatch(notifActions.notifSend({ message, kind: 'warning', dismissAfter: 5000 }))
+    })
   })
 }
 

@@ -3,8 +3,10 @@ import React, { Component, PropTypes } from 'react'
 import { Grid, Nav, Navbar, NavItem } from 'react-bootstrap'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
+import { Notifs } from 're-notif'
 
 import config from '../../config'
+import { AlertMessage } from '../../components'
 
 export default class App extends Component {
   static propTypes = {
@@ -17,7 +19,7 @@ export default class App extends Component {
     return (
       <Grid className={styles.app}>
         <Helmet {...config.app.head}/>
-        <Navbar fixedTop>
+        <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
@@ -47,7 +49,7 @@ export default class App extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
+        <Notifs CustomComponent={AlertMessage}/>
         <div className={styles.appContent}>
           {this.props.children}
         </div>
