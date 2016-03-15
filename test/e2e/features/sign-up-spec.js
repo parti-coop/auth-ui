@@ -1,32 +1,38 @@
 import { describe as feature, describe as context } from 'mocha'
 import '../support/setup-mocha'
-import { user_does_not_exist } from '../support/features/user'
+
+import { createBrowser } from '../support/browser'
+import {
+  user_does_not_exist,
+  user_should_exist
+} from '../support/features/user'
+import {
+  sign_up,
+  user_should_see_sign_up_confirmation_sent_page
+} from '../support/features/sign-up'
+import { user_should_see_message } from '../support/features/message'
 
 feature('Signs up', () => {
-  // before(() => {
-  //   http_server = http.createServer((req, res) => {
-  //     res.writeHead(200, { 'Content-Type': 'text/plain' })
-  //     res.end('success')
-  //   }).listen(8081)
-  // })
-
   let browser
   beforeEach(() => {
     browser = createBrowser()
   })
   afterEach(() => {
-    browser.end()
+    return new Promise(resolve => {
+      browser.end().then(() => resolve())
+    })
   })
 
   scenario('User signs up', function *() {
     yield user_does_not_exist({
       email: 'user@email.com'
     })
-    yield sign_up({
+    yield sign_up(browser, {
       email: 'user@email.com',
       password: 'Passw0rd!'
     })
-    user_should_be_created({
+    yield user_should_see_sign_up_confirmation_sent_page(browser)
+    yield user_should_exist({
       email: 'user@email.com'
     })
   })

@@ -1,6 +1,4 @@
 import { expect } from 'chai'
-
-import { api_client } from '../api-client'
 import { auth_ui_url } from '../../../../src/utils/auth-url'
 
 export function sign_up(browser, {email, password}) {
@@ -17,3 +15,13 @@ export function sign_up(browser, {email, password}) {
   })
 }
 
+export function user_should_see_sign_up_confirmation_sent_page(browser) {
+  return new Promise(resolve => {
+    browser.wait(() => {
+      console.log(document.location.pathname)
+      return document.location.pathname === '/sign-up-confirmation-sent'
+    }).then(() => {
+      resolve()
+    })
+  })
+}

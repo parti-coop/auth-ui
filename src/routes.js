@@ -6,6 +6,7 @@ import {
   About,
   SignInView,
   SignUpView,
+  SignUpConfirmationSentView,
   NotFound
 } from 'containers'
 
@@ -20,6 +21,7 @@ export default () => {
       { /* Routes */ }
       <Route path="authorizations" component={SignInView}/>
       <Route path="sign-up" component={SignUpView}/>
+      <Route path="sign-up-confirmation-sent" component={SignUpConfirmationSentView}/>
       <Route path="about" component={About}/>
 
       { /* Catch all route */ }

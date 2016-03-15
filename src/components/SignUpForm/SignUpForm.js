@@ -21,7 +21,7 @@ class SignUpForm extends React.Component {
         <form className={SignUpFormClassName} onSubmit={handleSubmit}>
           <Input type="email" label="Email" placeholder="Enter email..." {...email} />
           <Input type="password" label="Password" placeholder="Enter password..." {...password} />
-          <Input type="password" label="PasswordConfirmation" placeholder="Enter password again..." {...passwordConfirmation} />
+          <Input type="password" label="Password Confirmation" placeholder="Enter password again..." {...passwordConfirmation} />
           <ButtonInput type="submit" value="Sign Up" bsStyle="primary" />
         </form>
       </Panel>

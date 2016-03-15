@@ -41,11 +41,17 @@ describe('API server', () => {
 })
 
 describe('browser', () => {
+  let browser
+  beforeEach(() => {
+    browser = createBrowser()
+  })
+  afterEach((done) => {
+    browser.end().then(() => { done() })
+  })
+
   it ('connects to auth-ui', function*() {
     const url = auth_ui_url('/')
-    const current_url = yield createBrowser()
-      .goto(url)
-      .url()
+    const current_url = yield browser.goto(url).url()
 
     expect(url_equals(url, current_url)).to.be.true
   })

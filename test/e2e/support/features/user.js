@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { api_test_client } from '../api-client'
+import { api_test_client } from '../api-test-client'
 
 export function user_exists(attrs = {}) {
   return api_test_client.post('/v1/test/users', { attrs_set: [ attrs ] }).then(res => {

@@ -32,7 +32,7 @@ describe('user_exists', () => {
     })
     expect(user.email).to.be.equals('one@email.com')
     expect(user.password).to.be.equals('OnePassword!')
-    user_should_exist({ user })
+    yield user_should_exist({ email: 'one@email.com' })
   })
 })
 
