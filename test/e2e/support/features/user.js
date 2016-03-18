@@ -45,3 +45,11 @@ export function user_should_be_asked_to_provide_credential(browser) {
   })
 }
 
+export function user_should_have_password({user_id, password}) {
+  return api_test_client.post(
+    `/v1/test/users/${user_id}/verify-password`,
+    { password: password }
+  ).then(res => {
+    expect(res.data).to.be.true
+  })
+}
