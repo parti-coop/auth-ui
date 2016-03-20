@@ -1,33 +1,65 @@
-import chai, { expect } from 'chai'
-import chai_as_promised from 'chai-as-promised'
-import { parse as parse_url } from 'url'
-chai.use(chai_as_promised)
+import chai, { assert, expect } from 'chai'
 
-import { registered_client_exist } from '../client'
+import '../../setup-mocha'
+import { CREATE_CLIENT, OPENID } from '../../../../../src/models/scope'
+import { access_token_is_granted } from '../token'
+import { auth_ui_url } from '../../../../../src/utils/auth-url'
+import { clean_database } from '../database'
+import { client_exists } from '../client'
+import { user_account_exists } from '../user-account'
 
-describe('registered_client_exist', () => {
-  it('returns valid client model', done => {
-    registered_client_exist().then(client => {
-      expect(client.client_id).to.exist
-      client.redirect_uris.forEach(uri => {
-        expect(parse_url(uri).host).to.not.empty
-      })
-      done()
-    }).catch(err => {
-      done(err)
-    })
+describe('client test factory', () => {
+  before(() => {
+    return clean_database()
   })
 
-  it('builds with overriding attributes', done => {
-    registered_client_exist({
-      client_id: 'overrided-client-id',
-      redirect_uris: ['http://overrided.url.com']
-    }).then(client => {
-      expect(client.client_id).to.equal('overrided-client-id')
-      expect(client.redirect_uris).to.have.members(['http://overrided.url.com'])
-      done()
-    }).catch(err => {
-      done(err)
+  describe('client_exists', () => {
+    it('creates client', function *() {
+      const redirect_uri = auth_ui_url('/about')
+      const account = yield user_account_exists()
+      const token = yield access_token_is_granted({
+        account: { identifier: account.identifier },
+        scopes: [ CREATE_CLIENT ]
+      })
+
+      const client = yield client_exists({
+        token: token.access_token,
+        redirect_uris: [ redirect_uri ]
+      })
+
+      expect(client.redirect_uris).to.eql([ redirect_uri ])
+      expect(client.client_id).to.exist
+      expect(client.client_secret).to.exist
+    })
+
+    it('responds 401 unauthorized without create_client scope', function *() {
+      const redirect_uri = auth_ui_url('/about')
+      const account = yield user_account_exists()
+      const token = yield access_token_is_granted({
+        account: { identifier: account.identifier },
+        scopes: [ OPENID ]
+      })
+
+      const client = yield client_exists({
+        token: token.access_token,
+        redirect_uris: [ redirect_uri ]
+      }).then(res => {
+        assert.fail('should not reach here')
+      }).catch(err => {
+        expect(err.status).to.equal(401)
+      })
+    })
+
+    it('responds 401 unauthorized without token', function *() {
+      const redirect_uri = auth_ui_url('/about')
+
+      yield client_exists({
+        redirect_uris: [ redirect_uri ]
+      }).then(res => {
+        assert.fail('should not reach here')
+      }).catch(err => {
+        expect(err.status).to.equal(401)
+      })
     })
   })
 })
