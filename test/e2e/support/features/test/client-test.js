@@ -1,4 +1,4 @@
-import chai, { assert, expect } from 'chai'
+import { assert, expect } from 'chai'
 
 import '../../setup-mocha'
 import { CREATE_CLIENT, OPENID } from '../../../../../src/models/scope'
@@ -40,10 +40,10 @@ describe('client test factory', () => {
         scopes: [ OPENID ]
       })
 
-      const client = yield client_exists({
+      yield client_exists({
         token: token.access_token,
         redirect_uris: [ redirect_uri ]
-      }).then(res => {
+      }).then(_res => {
         assert.fail('should not reach here')
       }).catch(err => {
         expect(err.status).to.equal(401)
@@ -55,7 +55,7 @@ describe('client test factory', () => {
 
       yield client_exists({
         redirect_uris: [ redirect_uri ]
-      }).then(res => {
+      }).then(_res => {
         assert.fail('should not reach here')
       }).catch(err => {
         expect(err.status).to.equal(401)

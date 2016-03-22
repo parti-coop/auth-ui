@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import R from 'ramda'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { Col, Row } from 'react-bootstrap'
 import { actions as notifActions } from 're-notif'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import { api_client } from '../../helpers/api-client'

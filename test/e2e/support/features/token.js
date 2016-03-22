@@ -1,10 +1,9 @@
-import R from 'ramda'
 import { expect } from 'chai'
 
 import { api_test_client } from '../api-test-client'
 import { api_client } from '../../../../src/helpers/api-client'
 
-export function access_token_is_granted({account: {identifier}, scopes = []}) {
+export function access_token_is_granted({ account: { identifier }, scopes = []}) {
   return api_test_client.post(
     `/v1/test/user-accounts/${identifier}/tokens`,
     { scopes }
@@ -13,7 +12,7 @@ export function access_token_is_granted({account: {identifier}, scopes = []}) {
   })
 }
 
-export function access_token_should_be_granted({ account, token, scopes = nil }) {
+export function access_token_should_be_granted({ account, token, scopes = null }) {
   return api_client.post(
     '/v1/introspect',
     { token: token.access_token },

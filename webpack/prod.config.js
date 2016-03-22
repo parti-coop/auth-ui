@@ -69,7 +69,9 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin([
       'APIHOST',
-      'APIPORT'
+      'APIPORT',
+      'HOST',
+      'PORT'
     ]),
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),

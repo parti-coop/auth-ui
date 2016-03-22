@@ -1,5 +1,6 @@
+/* global scenario:true */
 import { expect } from 'chai'
-import { describe as feature, describe as context } from 'mocha'
+import { describe as feature } from 'mocha'
 import '../support/setup-mocha'
 
 import { createBrowser } from '../support/browser'

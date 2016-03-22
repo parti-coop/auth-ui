@@ -112,7 +112,9 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin([
       'APIHOST',
-      'APIPORT'
+      'APIPORT',
+      'HOST',
+      'PORT'
     ]),
     webpackIsomorphicToolsPlugin.development()
   ]

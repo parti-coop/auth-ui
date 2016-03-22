@@ -11,6 +11,7 @@ import ApiClient from './helpers/ApiClient'
 import Html from './helpers/Html'
 import PrettyError from 'pretty-error'
 import http from 'http'
+import url from 'url'
 
 import { match } from 'react-router'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect'
@@ -43,6 +44,27 @@ app.use('/ws', (req, _res) => {
 // server.on('upgrade', (req, socket, head) => {
 //   proxy.ws(req, socket, head)
 // })
+
+app.post('/v1/authorizations', (req, res) => {
+  const parsed_url = url.parse(req.url)
+  const options = {
+    headers: req.headers,
+    hostname: config.apiHost,
+    method: req.method,
+    path: parsed_url.path,
+    port: config.apiPort,
+    protocol: 'http:'
+  }
+  const proxyReq = http.request(options, proxyRes => {
+    const statusCode = proxyRes.statusCode === 302 ? 200 : proxyRes.statusCode
+    res.writeHead(statusCode, proxyRes.headers)
+    proxyRes.pipe(res)
+  // }).on('error', err => {
+  //   res.statusCode = 500
+  //   res.end()
+  })
+  req.pipe(proxyReq)
+})
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {

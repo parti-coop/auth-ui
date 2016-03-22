@@ -1,5 +1,3 @@
-import chai, { expect } from 'chai'
-
 import '../../setup-mocha'
 import { clean_database } from '../database'
 import {
