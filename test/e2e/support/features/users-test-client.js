@@ -4,12 +4,10 @@ import normalize_url from 'normalize-url'
 
 import config from '../../../../src/config'
 import { users_api_url } from '../../../../src/utils/parti-url'
-import { client_credential_token } from '../../../../src/helpers/auth-client'
-
-const auth_ui_test_client = {
-  client_id: process.env.AUTH_UI_TEST_CLIENT_ID,
-  client_secret: process.env.AUTH_UI_TEST_CLIENT_SECRET
-}
+import {
+  auth_ui_test_client_credential_token,
+  add_token_header
+} from './test-client'
 
 export default {
   get(path, options = {}) {
@@ -47,18 +45,3 @@ function delete_with_token(token, path, options) {
   return users_api_client.delete(path, add_token_header(token, options))
 }
 
-function add_token_header(token, params) {
-  if (!params.hasOwnProperty('headers')) {
-    params.headers = {}
-  }
-  Object.assign(params.headers, { 'Authorization': `Bearer ${token.access_token}` })
-  return params
-}
-
-export function auth_ui_test_client_credential_token() {
-  const { client_id, client_secret } = auth_ui_test_client
-  return client_credential_token({
-    client_id,
-    client_secret
-  })
-}
