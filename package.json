@@ -36,7 +36,7 @@
     "test": "npm run test-node && npm run test-e2e",
     "test-e2e": "npm run test-e2e-with -- test/e2e && npm run test-e2e-with -- --recursive test/e2e/features",
     "test-e2e-with": "npm run mocha -- -t 15000 --ui bdd",
-    "test-node": "npm run mocha -- test/support test/features --recursive",
+    "test-node": "npm run mocha -- $( ls -d test/* | grep -v test/e2e ) --recursive",
     "test-node-watch": "npm run test-node -- --watch",
     "watch-client": "better-npm-run watch-client"
   },
