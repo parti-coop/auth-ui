@@ -13,9 +13,35 @@ const auth_ui_client = {
 
 export const CLIENT_CREDENTIALS_GRANT_TYPE = 'client_credentials'
 
-const auth_api_client = axios.create({
+export default {
+  get(path, options = {}) {
+    return get_with_token(options.token, path, options)
+  },
+
+  post(path, data, options = {}) {
+    return post_with_token(options.token, path, data, options)
+  },
+
+  delete(path, options = {}) {
+    return delete_with_token(options.token, path, options)
+  }
+}
+
+export const auth_api_client = axios.create({
   baseURL: auth_api_url()
 })
+
+export function get_with_token(token, path, options) {
+  return auth_api_client.get(path, add_token_header(token, options))
+}
+
+export function post_with_token(token, path, data, options) {
+  return auth_api_client.post(path, data, add_token_header(token, options))
+}
+
+export function delete_with_token(token, path, options) {
+  return auth_api_client.delete(path, add_token_header(token, options))
+}
 
 export function auth_ui_client_credential_token() {
   const { client_id, client_secret } = auth_ui_client
@@ -57,4 +83,12 @@ export function client_credential_token({ client_id, client_secret }) {
     }
     return token
   })
+}
+
+export function add_token_header(token, params = {}) {
+  if (!params.hasOwnProperty('headers')) {
+    params.headers = {}
+  }
+  Object.assign(params.headers, { 'Authorization': `Bearer ${token.access_token}` })
+  return params
 }

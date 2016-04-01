@@ -1,13 +1,8 @@
 import axios from 'axios'
-import qs from 'qs'
-import normalize_url from 'normalize-url'
 
-import config from '../../../../src/config'
 import { users_api_url } from '../../../../src/utils/parti-url'
-import {
-  auth_ui_test_client_credential_token,
-  add_token_header
-} from './test-client'
+import { auth_ui_test_client_credential_token, } from './test-client'
+import { add_token_header } from '../../../../src/helpers/auth-client'
 
 export default {
   get(path, options = {}) {
