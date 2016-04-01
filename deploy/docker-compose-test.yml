@@ -2,10 +2,10 @@ auth-api:
   environment:
     - DB_USER=postgres
     - RAILS_ENV=test
+    - USERS_API_HOST
   image: partixyz/auth-api:0.3.1-3-ga55701c
   links:
     - db:auth-db
-    - users-api
   ports:
     - 3030:3030
 auth-ui:
@@ -28,6 +28,7 @@ users-api:
     - RAILS_ENV=test
   image: partixyz/users-api:0.2.0-5-g7fd4373
   links:
+    - auth-api
     - db:users-db
   ports:
     - 3031:3030
