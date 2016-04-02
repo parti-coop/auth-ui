@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react'
+import Helmet from 'react-helmet'
+import Nav from 'react-bootstrap/lib/Nav'
+import Navbar from 'react-bootstrap/lib/Navbar'
+import NavItem from 'react-bootstrap/lib/NavItem'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import Navbar from 'react-bootstrap/lib/Navbar'
-import Nav from 'react-bootstrap/lib/Nav'
-import NavItem from 'react-bootstrap/lib/NavItem'
-import Helmet from 'react-helmet'
-import config from '../../config'
+import { Notifs } from 're-notif'
 import { asyncConnect } from 'redux-async-connect'
+
+import config from '../../config'
+import { AlertMessage } from '../../components'
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -29,7 +32,7 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head}/>
-        <Navbar fixedTop>
+        <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
@@ -42,6 +45,9 @@ export default class App extends Component {
 
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
+              <LinkContainer to="/authorizations">
+                <NavItem eventKey={4}>Authorizations</NavItem>
+              </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem eventKey={4}>About Us</NavItem>
               </LinkContainer>
@@ -53,16 +59,9 @@ export default class App extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
+        <Notifs CustomComponent={AlertMessage}/>
         <div className={styles.appContent}>
           {this.props.children}
-        </div>
-
-        <div className="well text-center">
-          Have questions? Ask for help <a
-          href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-          target="_blank">on Github</a> or in the <a
-          href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
         </div>
       </div>
     )

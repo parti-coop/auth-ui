@@ -2,7 +2,6 @@ import R from 'ramda'
 import moment from 'moment'
 import axios from 'axios'
 import qs from 'qs'
-import normalize_url from 'normalize-url'
 
 import { auth_api_url } from '../utils/parti-url'
 

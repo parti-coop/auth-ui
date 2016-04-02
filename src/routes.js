@@ -1,9 +1,10 @@
 import React from 'react'
 import {IndexRoute, Route} from 'react-router'
 import {
-    App,
-    Home,
     About,
+    App,
+    Authorizations,
+    Home,
     NotFound,
   } from 'containers'
 
@@ -17,6 +18,7 @@ export default (store) => {
       <IndexRoute component={Home}/>
 
       { /* Routes */ }
+      <Route path="authorizations" component={Authorizations}/>
       <Route path="about" component={About}/>
 
       { /* Catch all route */ }

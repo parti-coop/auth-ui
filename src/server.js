@@ -1,23 +1,29 @@
 import Express from 'express'
+import PrettyError from 'pretty-error'
+import R from 'ramda'
 import React from 'react'
 import ReactDOM from 'react-dom/server'
-import config from './config'
-import favicon from 'serve-favicon'
+import bodyParser from 'body-parser'
 import compression from 'compression'
+import createHistory from 'react-router/lib/createMemoryHistory'
+import createStore from './redux/create'
+import favicon from 'serve-favicon'
+import http from 'http'
 import httpProxy from 'http-proxy'
 import path from 'path'
-import createStore from './redux/create'
-import ApiClient from './helpers/ApiClient'
-import Html from './helpers/Html'
-import PrettyError from 'pretty-error'
-import http from 'http'
-
-import { match } from 'react-router'
+import request_promise from 'request-promise'
+import { Provider } from 'react-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect'
-import createHistory from 'react-router/lib/createMemoryHistory'
-import {Provider} from 'react-redux'
+import { match } from 'react-router'
+
+import client from './helpers/ApiClient'
+import Html from './helpers/Html'
+import applyMiddleware from './middlewares'
+import config from './config'
 import getRoutes from './routes'
-import applyMiddleware from 'middlewares'
+import { auth_ui_client_credential_token } from './helpers/auth-client'
+import users_client from './helpers/users-client'
+import { auth_api_url } from './utils/parti-url'
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort
 const pretty = new PrettyError()
@@ -35,9 +41,42 @@ app.use(Express.static(path.join(__dirname, '..', 'static')))
 
 applyMiddleware(app)
 
-// Proxy to API server
-app.use('/api', (req, res) => {
-  proxy.web(req, res, {target: targetUrl})
+const sign_in_handlers = [
+  bodyParser.urlencoded({ extended: true }),
+  bodyParser.json()
+]
+
+app.post('/v1/sign-in', sign_in_handlers, (req, res) => {
+  const data = R.pick(['email', 'password'], req.body)
+  auth_ui_client_credential_token().then(token => {
+    console.log('sign in with token: ' + token.access_token)
+    return users_client.post('/v1/users/sign_in', data, { token })
+  }).then(users_res => {
+    const form = R.pick(['client_id', 'nonce', 'response_type', 'scope', 'state'], req.body)
+    const headers = R.pick(['access-token', 'client', 'uid'], users_res.headers)
+    return request_promise({
+      form,
+      headers,
+      method: 'POST',
+      resolveWithFullResponse: true,
+      simple: false,
+      uri: auth_api_url('/v1/authorizations')
+    })
+  }).then(auth_res => {
+    let status_code = auth_res.statusCode
+    let headers = R.pick(['content-type'], auth_res.headers)
+    if (status_code === 302) {
+      status_code = 200
+      headers = R.merge(headers, R.pick(['location'], auth_res.headers))
+    }
+    res.writeHead(status_code, auth_res.statusMessage, auth_res.headers)
+    res.end(auth_res.body)
+  }).catch(err => {
+    console.log(err)
+    const headers = R.pick(['content-type'], err.headers)
+    res.writeHead(err.status, err.statusText, headers)
+    res.end(JSON.stringify(err.data))
+  })
 })
 
 app.use('/ws', (req, res) => {
@@ -68,7 +107,6 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh()
   }
-  const client = new ApiClient(req)
   const history = createHistory(req.originalUrl)
 
   const store = createStore(history, client)
