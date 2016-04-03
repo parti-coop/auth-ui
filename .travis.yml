@@ -1,9 +1,8 @@
 env:
   global:
     - AUTH_UI_REPO=partixyz/auth-ui
-    - secure: JemPRbvppOBeatUXaDShEPnGCb3Z2ZN2d6EoOV5FFNQrYu3RP0a7QQ9bcJLuh9BUgcqdhvhI0P8JDYY3HFqn3+7oukJl47A7KZf84g1afGh5Krr8GZtVRVvZP5BozlMPeSPLOBEixIGB2QEvRglQpApQuRWVtrcWu1Tlh6ti30VshAyw0+j2XkZnwuOHsjr8NmEvny2xl8hn9YdeGe4j2Rahmmm8gbV+folVf9OJqxGaht1TQUDUbzAeSdvUTHa1j+yotim/rK3HDmGWQ0GFhIH5dN0Gsf0zwUIXjFhjlzAlISCY05qhUi7YRRi+jmnJpqd6SOYR6B3tymb9m1pexCkX7SNZaJvaPLwjx/JHHy1giumuD0K2JKpTkVWxDzdRHLs7SRtOeSOZ7fKqrg0/29tjjiAsGjx8JeFwGpWicPd1xdEa51faLiYxdgUhwcVNc80SebPngO5MEgjp2KNfDxkT38Z6RCsW8mYRms/71JcP0x4fg1ZZ5jilyKSFkxgXTq4YcmaxZEuSaHkBZZo4ni3fQ5NH0GkwPKxf4fH7P32cj7e4kSZwic0cj8jwT3JYGxOpC/KudOYOzBXYpyRVWV7WSmrUyTbdUgiLAkyo6x1SKF5tG2tUvV0fDpC44Xg0JrKGsfNlN77nG7209YXREbLErAR0epvo8hsNLHU8bU0=
-    - secure: WtMrAAYTLGdzrFw4ncV4ePzQ/XW8hO7EHtLRtNSwHQLBeK1DERnZwiXDe6c4VRiPB7i9Fxo1iCLHKZq3vPMYwFojiSxaQXWXJ0+VwgEjnGy5EUsnXdnn2ttCGJLgKSR/LR7jhIRFBNfd8BdFxVfJltAyIcOV4cc7aRAyNsoE486rg5Mj0DRPzM+j7wNBx2Aj+v62Rr4cqvZ6HQvzBy0PE4xKSKCTbXjT7k0zTdDxORjubiLWC1mYlohOcOLg+tCJp0nWKeRmYk72TkBvaUGU2xsOfta+2R2EVnSs6UFb2YHY3Xyflr8ruU19MyPmG2Q/8JYsJCJOFfh60qsRiEfabc7VY1pzfgsOIpBqByfifJf7FQPS7SYoTFFRBddGn5nr6tCF55CINZlFDuuZId07PYDZHjcyrnDgId3ijSIaYQeYEv+bxLdDWbNJRdrvNHUYzoc+o2te5poxw45ovVTqNen5a2JSg1AHHVMRjcNXuN2pEnTltWzbPxDOPCQg7G7C5ws1swEpTl+xEGRU+EGDzOohLMWnZ9iv5ok3B4pMrvJ+rToVNSH2vFf7/YQ0+iad22dGbGE1UcQHCC8Ofj7oBkAbZmnD4P2u1h1dVkAYN7Hr+MCh8g3y3oJNee66Txfbd6VuHNV2w4aaxCSXj6o/H4P77hanYfIPs89jGT5su+I=
-    - secure: fLqimaBMj0NuSblvnJcPQ9bQSx9oqH+agjV0h6k8WJGvlK3hUf3OWsWxu29vh6iDVWzedSSHH7icaCSxUQqzShsAzf7x3qwpH5gLExDDx++e1tltO0RI1naEv53h1QRB1q2bMp9AVpdETJOopyOpVvh6mbLJom72mezV9aaITA2Q9pTJn66F1/KDqsRVUk2TUReG/FF9EQaqT37XhIW4ykLgb9vFyFNSiF0oPR0J52dVCeXJtAvVF2KZ0k2q78M2yf0TertU3+ExcKeCSz7Cr0RMvppy0qEE7dhgpU1PkNEaEgDVYJG8h/z+M19UPSJkjJGKLLmJ5+1oT9HeEQAhUcmr56MsvKRumoOhUtWzeZ++Qw6BbGDzIkOJAnp8fQpzsA3lSLxrlzXwVfhk3ZNoZPaJ1ROvarpGB8lBt9nwI/9iyX28ht7zI2iz9dzDImLu1EzCXfxvjbNdos1GKzhCd1l4o8fq13OklQYPFlFD1g3JB+VByBJ8mw6IKHGaFxgSz5z9YoUPAZRUgUf8ogb9eCVfkdrgDnlBNmqs1/Nd5D4nbWZr7NjnLGwsmnhJwARBdxCuWe8CmO06/HDRqdNsPHPe6K7TGYfQL9AAB8zV5eLzDkAJnWfc99Xpan72nnDtJEhL6jfuNQ0vlar5n0DhtrdUe6dKvO2YUbiqBhIPqCw=
+    - USERS_API_PORT=3031
+    - secure: Xee1vuhmqzpTJMDGpZijOeMKE5NGNcskI9j10dv6vFp9oTjtyhEprpbuwEsc9bZ0TXoT9bpiEZUxX3eAWomTvM4OefVLVU34TPzZ7+5a5XBJc5IlnsiY4RqT+SAkqxHjrFcWlts1LyrkiS3mt+e5BQ+wMCKt+DbEmZ//PT/McTkAUatRE5clQqKJW3wQk8cP4GGbjtJeelpkjejb6fPwqAIPN3mnkmMOIUtvPi5BRh6zdaamQeLHtB3KAu+EjOObpJ+xNasGirZ6ijARrMZXfD7LKgxLX4wSMNXsV1MHW8+cOtZRBThk4vXBcQ6GuY2NGf0PoRbe/n01hmP/3T3MiTcUC+ZLyDMKkpc+KVaARfc4UC2WtyWgLOPIxOeNyVIXwNBFbnYOncCQzHweJe2YmgYD0q1DlpEUEMrS87NCfKS31YyhNivOsrBgt3AQBPTA1nc+k4vgcWqywY8/JZqwIyfQX9nOJJYUL8cdg/QkfL2vsCrHCcME3YgvsbJFgo+JL6DCYzjSpqZz3LYxrfhlU0vBph7W9wepW3VfNs6vQfva/cdYR8iUg32VC0ncQfV6+gbEI4fIXfmOVtEV8nvTAjryyIC7+eQIOBfwsqVrPDUxuJNHEODXeWtXpq6UR7huWK272YqpJ0msyfz17OyxP2BeAUc4YDSTnE0JA2pjHeg=
 
 language: node_js
 
@@ -15,8 +14,19 @@ sudo: required
 services:
   - docker
 
+addons:
+  hosts:
+    - auth-api
+    - users-api
+
 before_install:
   - sudo service postgresql stop
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  - sudo apt-get -y install python-pip
+  - sudo pip install docker-compose
+  - docker -v
+  - docker --help
   - docker-compose -v
   - echo $NODE_ENV
 
@@ -25,6 +35,10 @@ install:
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - npm install
 
+before_script:
+  - openssl aes-256-cbc -d -k $secret -in .env.enc -a -out .env
+  - source .env; rm -f .env
+
 script:
   - ./deploy/docker-compose-up-test.bash
   - npm run test-node
@@ -32,6 +46,12 @@ script:
   - export APP_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
   - echo "building $AUTH_UI_REPO:$APP_VERSION"
   - ./deploy/build-docker-image.bash
+  - AUTH_API_CONTAINER=$( docker-compose -f deploy/docker-compose-test.yml ps -q auth-api )
+  - docker attach --sig-proxy=false $AUTH_API_CONTAINER | sed -e 's/^/AUTH /' &
+  - docker exec -i $AUTH_API_CONTAINER sh -c "tail -f log/test.log | sed -e 's/^/AUTH-LOG /'" &
+  - USERS_API_CONTAINER=$( docker-compose -f deploy/docker-compose-test.yml ps -q users-api )
+  - docker attach --sig-proxy=false $USERS_API_CONTAINER | sed -e 's/^/USERS /' &
+  - docker exec -i $USERS_API_CONTAINER sh -c "tail -f log/test.log | sed -e 's/^/USERS-LOG /'" &
   - docker-compose -f deploy/docker-compose-test.yml up auth-ui &
   - sleep 3
   - docker-compose -f deploy/docker-compose-test.yml ps

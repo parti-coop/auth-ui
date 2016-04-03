@@ -14,7 +14,8 @@ auth-api:
 auth-ui:
   environment:
     - APIHOST=auth-api
-    - RAILS_ENV=test
+    - AUTH_UI_CLIENT_ID
+    - AUTH_UI_CLIENT_SECRET
   image: partixyz/auth-ui:current
   links:
     - auth-api

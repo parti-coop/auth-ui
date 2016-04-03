@@ -23,10 +23,9 @@ feature('Grant authorization code', () => {
 
   beforeEach(() => {
     browser = createBrowser()
-    return Promise.all([
-      clean_auth_database(),
-      clean_users_database()
-    ])
+    return clean_auth_database().then(() => {
+      return clean_users_database()
+    })
   })
 
   afterEach((done) => {
