@@ -2,13 +2,13 @@ FROM node:5.6-slim
 
 ENV NODE_ENV production
 
-COPY package.json /parti/users-ui/package.json
+COPY package.json /parti/auth-ui/package.json
 
-WORKDIR /parti/users-ui
+WORKDIR /parti/auth-ui
 
 RUN npm install
 
-COPY . /parti/users-ui
+COPY . /parti/auth-ui
 
 EXPOSE 8080
 
