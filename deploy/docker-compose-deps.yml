@@ -1,0 +1,30 @@
+auth-api:
+  environment:
+    - AUTH_API_CERTIFICATE_BASE64
+    - AUTH_API_PRIVATE_KEY_BASE64
+    - AUTH_API_PRIVATE_KEY_PASS_PHRASE
+    - DB_USER=postgres
+    - RAILS_ENV
+    - SECRET_KEY_BASE
+  image: partixyz/auth-api:0.3.1-17-g0f69a32
+  links:
+    - db:auth-db
+  ports:
+    - 3030:3030
+db:
+  image: postgres:9.4
+  ports:
+    - 5432:5432
+users-api:
+  environment:
+    - DB_USER=postgres
+    - RAILS_ENV
+    - SECRET_KEY_BASE
+    - USERS_API_CLIENT_ID
+    - USERS_API_CLIENT_SECRET
+  image: partixyz/users-api:0.2.0-13-gfdf467c
+  links:
+    - auth-api
+    - db:users-db
+  ports:
+    - 3031:3030

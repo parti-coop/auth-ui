@@ -14,4 +14,4 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 
-docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml "$@"
+docker-compose -f ${DOCKER_COMPOSE_FILE} "$@"
