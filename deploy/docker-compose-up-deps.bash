@@ -27,9 +27,8 @@ fi
 docker-compose -f ${DOCKER_COMPOSE_FILE} up -d db
 sleep 2
 docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm auth-api bin/rails db:setup
-docker-compose -f ${DOCKER_COMPOSE_FILE} up -d auth-api
 docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm users-api bin/rails db:setup
-docker-compose -f ${DOCKER_COMPOSE_FILE} up -d users-api
+docker-compose -f ${DOCKER_COMPOSE_FILE} up -d auth-api users-api
 
 AUTH_API_CONTAINER=$( docker-compose -f ${DOCKER_COMPOSE_FILE} ps -q auth-api )
 docker network connect $AUTH_NETWORK $AUTH_API_CONTAINER

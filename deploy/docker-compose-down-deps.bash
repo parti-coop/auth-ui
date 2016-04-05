@@ -17,4 +17,4 @@ ROOT_DIR=$( dirname $SCRIPT_DIR )
 
 DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${SCRIPT_DIR}/docker-compose-deps.yml}
 
-${SCRIPT_DIR}/docker-compose -f $DOCKER_COMPOSE_FILE down
+docker-compose -f $DOCKER_COMPOSE_FILE down

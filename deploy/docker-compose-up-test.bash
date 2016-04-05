@@ -25,9 +25,9 @@ fi
 docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml up -d db
 sleep 2
 docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml run --rm auth-api bin/rails db:setup
-docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml up -d auth-api
 docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml run --rm users-api bin/rails db:setup
-docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml up -d users-api
+
+docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml up -d auth-api users-api auth-ui
 
 AUTH_API_CONTAINER=$( docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml ps -q auth-api )
 docker network connect --alias auth-api $AUTH_NETWORK $AUTH_API_CONTAINER

@@ -1,8 +1,14 @@
 env:
   global:
     - AUTH_UI_REPO=partixyz/auth-ui
+    - AUTH_API_EXTERNAL_HOST=localhost
+    - AUTH_API_EXTERNAL_PORT=3030
+    - AUTHORIZATION_ENDPOINT=http://localhost:8080/authorizations
     - USERS_API_PORT=3031
-    - secure: Xee1vuhmqzpTJMDGpZijOeMKE5NGNcskI9j10dv6vFp9oTjtyhEprpbuwEsc9bZ0TXoT9bpiEZUxX3eAWomTvM4OefVLVU34TPzZ7+5a5XBJc5IlnsiY4RqT+SAkqxHjrFcWlts1LyrkiS3mt+e5BQ+wMCKt+DbEmZ//PT/McTkAUatRE5clQqKJW3wQk8cP4GGbjtJeelpkjejb6fPwqAIPN3mnkmMOIUtvPi5BRh6zdaamQeLHtB3KAu+EjOObpJ+xNasGirZ6ijARrMZXfD7LKgxLX4wSMNXsV1MHW8+cOtZRBThk4vXBcQ6GuY2NGf0PoRbe/n01hmP/3T3MiTcUC+ZLyDMKkpc+KVaARfc4UC2WtyWgLOPIxOeNyVIXwNBFbnYOncCQzHweJe2YmgYD0q1DlpEUEMrS87NCfKS31YyhNivOsrBgt3AQBPTA1nc+k4vgcWqywY8/JZqwIyfQX9nOJJYUL8cdg/QkfL2vsCrHCcME3YgvsbJFgo+JL6DCYzjSpqZz3LYxrfhlU0vBph7W9wepW3VfNs6vQfva/cdYR8iUg32VC0ncQfV6+gbEI4fIXfmOVtEV8nvTAjryyIC7+eQIOBfwsqVrPDUxuJNHEODXeWtXpq6UR7huWK272YqpJ0msyfz17OyxP2BeAUc4YDSTnE0JA2pjHeg=
+    - secure: xS1G0BOTvgm0EHpJxComIF0wxP6X9VnRQ7D2wv0ROyhqT69h8aVNmIl30DDIHFzkxkRsa4YUbgoyljOoBhO9VjD1gTBOj1/dAme9PdxN/ouJn0Aw4QPYpF424QBpMVJ4vAJo1E8yFMWqlcfOLqcyOhPGDzRUghVt/eFjNICri7q6VHffb2YLltxGySimluJ6RBN0r4I26CrJBKAC/CT0WYUrjOFoRu7UveVcc9fPPueCckhCiJG6efhUURCHZAnX5hXvavcZRtt2F2JGfilj1e9vvJ8cVx72d0GdQcgbDbwF3Q8OED9kZaHSAzkvq2IkycZPuedIRjsfO0hJgEchN55dVqCDQQPPMMCLjVyDpIpBE/orNZukie9sPAoPW9r0c13qBq/ltdagmt0yalYJcTa1Y0iygJXoas6QZaBhKrdAjgbGy5Ohbn8dVnKilR/WNO5iYwUtZ3Pjk3w1vEqfc/0pxCIKqKHDfXMY1LV/uvOgaeR3+C+iJH5E8nm3SHkIXC8F1FoOUcAgmdMup/IDhDcBXAk40ANxaT2nj0JwYtfZ7OmWawZ92v6dvhc7+TPGozjzECa3l3AzhMmRh/kJH/UEN8v3A6tjBydW2A/L8LVrmFoQoE9o4uiUjVuQ8gmD9OTs0ULHl2Cb1PL4h/ssMon2iRbyWjNhhXi8aN4F8g8=
+    - secure: j0cPYoIKqfe8vln1q9GeoM6tH78IPx2MF5bASk4Q8OT/Q/u6BR/V9XrKgSBrLEyhbS1Ic4c3UR8JbibyH6eAFUq40hcJRUTpxfNP2E/Fa6kPYikYyecq+6Yv53YmAMIPEeCmEj5kBWBtNJLenddza9bpwzDt02W2YgEbJ1UiiKOc9gvv2x5Ca5PHQvXn3NkWiSqPPXMMGSzYGFbd46y4RtbxoJ0VaF1Ci541Q5zKJTvx73iZg353vtTr5YO7M7BuS7w2ewUFSgvw1CBtbnxGmnudfVlutXQwKmain7VqUPYEt2hCnDydUQJyG1dovWWd2b56Ixw0ZAR6Az2zGYNSQgEIU7aYrhiKx2VjzgvUaWciX43GCjVvFMQp31GsM09je3avARvh20u3FC5MEP+FNiEUWgYwKOTbhsNYjaA+eRaNFnUiFJSy3o9VNLFxgVlSZwYoryZ11+dzSeVwYLbOxOd88j7JGRIJB2Sp8Om8Z0N+vSY2TV3nebmlOOQF+BOXsPRkKzTXIOu7epxzgLKsM7hFyN805FxoUj5YcJ2NjUgvm784Be/zJOuMlDA7sQ3VaMpkqhW6zS2dvGIbILTmJ0f+uNj8gM59AOdlRqeJmkch404zMYvd33zq2xLAk+GQ2jLu5ssLLBTvTOkDsEBsaVzA0g6O1fr5vW76X/UF82I=
+    - secure: E3I2gRWQL0kFPb3YtPANJsVt4kw0eoEDC9obdQ9/6hbc4jy9pZ+DXeePwusbJ5pWat3IlKajPODQLZCj3LEG0mvpWWB/zm+Pn6zg1AQamVD/BTmcUKJkbVr/eEUFYuKOGYaOkAGoKbCSMmDu/TKIXZPT2peQRkhtVJJ29PRQJjLoTKP20TxLJ8x/ESnoHy85vna1LM7ZHaaOoOjUAsmsK+uAF2i4P4V+o0928hGrKhEFmlz4E3Nu4NJpTu5eyHbsc1NhA6pdm3EXgoib9EmlL1gKy6W/epDB4oSqNLqAE5NRzCFWR1sFGLtSKLqq2hgH5jWPCXveVwfrUcVr6/GN2ZHIecQ3EipsZJJM5jOynlaMRUpA379fxBrNjB8N3hUcf2WUkIPs2z/fMPpBTvsCUDp5rj8Uhd+t8/2M0lUAgOMNuwKQHHus83PsaJmuIBFP6/+wI15oJIY0vtDXjPRfeXVgcSN4txb5bp0FGV4UMeEdfL+1Nj6S0mwwVKVsgXr7BULbYntL4DYZOMFzmX3aC2DosLNC3QS0B2hAmxbcWleuv5RCTRkT9aGRTnWw+rZa5Fk81EFXMMk67cxN4BaB0z8KidMYOHiBdVC1Nau7Mq0mtGKues8ZSOqafPujUwONq1vWNlNHfN14vKeOYr15znf+VU6AmMqpCQzPsQ/SwpI=
+    - secure: okScul9o31FeWEZ8kxv+lYJ2xks5VQlsB2x7wIjdBFo4IfRqCJDA+I6pFJnn4PwGr0bWvDyX6C9VBcPcrR86K92txokxmKvOZrt2Km8uQknQ95lUiNKPGbTcHP468vqlxrNvN2J0Bi9EcX5iqGcC01ZP3rjW6Uh6ocCRhBc8C3PkRe2J/+ChIG02R5oFcT/foYNngPhtwc1z66MhxU4ciPoQW0cMFcjlOLcfrBzvZxRUfo7gxitYQ6qLnis0ezv1mm3GoYtfqgOVE8MKYjFOvDWNCW+Lfv2iOBITES0RG2S78bOBjreOlvSZMwnffwGsDkg2S8YYn6X9zno+xPqLA8x8CMx0PJmSGpYK2t5skVt0QyNK6vbQmlldzSoXy4IQrejEAQlkuUEljZC9HvWoOEZeFUF0iUT6iV0I3c3/Su6vpdAicyIrk5qJdQ/MCq8Q1whqUbsruGyjKlLlW8yZixZIz7+5jAs94FQgnH0Rky3jJ+fS3Q5AFzWgRU07yyVBCkawVkvhRIR/7xaEQ2oknHJTZkR24MkKqJV48Uk1/jnu9vgcIcgwH4FNcfY6qQf7qTJF0tgTy3zRDHkbBciAUtkKItBSCopqeh8VExSRBQ7FR8q9lfG/42qEHMR1oSTL+nFDDugaf+7YTnBJ5qYNqYIfTqjIuDkz//4Sq+i1siw=
 
 language: node_js
 
@@ -26,7 +32,6 @@ before_install:
   - sudo apt-get -y install python-pip
   - sudo pip install docker-compose
   - docker -v
-  - docker --help
   - docker-compose -v
   - echo $NODE_ENV
 
@@ -40,23 +45,23 @@ before_script:
   - source .env; rm -f .env
 
 script:
-  - ./deploy/docker-compose-up-test.bash
-  - npm run test-node
+  - ./deploy/docker-compose-up-deps.bash
+  - sleep 2
 
-  - export APP_VERSION=`git describe  --tags --long || echo ${TRAVIS_COMMIT::12}`
-  - echo "building $AUTH_UI_REPO:$APP_VERSION"
+  - npm run test-node
+  - ./deploy/docker-compose-down-deps.bash
+
+  - export APP_VERSION=$( git describe  --tags --long || echo ${TRAVIS_COMMIT::12} )
   - ./deploy/build-docker-image.bash
-  - AUTH_API_CONTAINER=$( docker-compose -f deploy/docker-compose-test.yml ps -q auth-api )
-  - docker attach --sig-proxy=false $AUTH_API_CONTAINER | sed -e 's/^/AUTH /' &
-  - docker exec -i $AUTH_API_CONTAINER sh -c "tail -f log/test.log | sed -e 's/^/AUTH-LOG /'" &
-  - USERS_API_CONTAINER=$( docker-compose -f deploy/docker-compose-test.yml ps -q users-api )
-  - docker attach --sig-proxy=false $USERS_API_CONTAINER | sed -e 's/^/USERS /' &
-  - docker exec -i $USERS_API_CONTAINER sh -c "tail -f log/test.log | sed -e 's/^/USERS-LOG /'" &
-  - docker-compose -f deploy/docker-compose-test.yml up auth-ui &
+
+  - ./deploy/docker-compose-up-test.bash
   - sleep 3
+
   - docker-compose -f deploy/docker-compose-test.yml ps
+  - docker-compose -f deploy/docker-compose-test.yml logs &
+
   - npm run test-e2e
 
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
   - docker push $AUTH_UI_REPO:$APP_VERSION
