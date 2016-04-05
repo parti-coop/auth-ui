@@ -55,7 +55,7 @@ app.post('/v1/sign-in', sign_in_handlers, (req, res) => {
     console.log('sign in with token: ' + token.access_token)
     return users_client.post('/v1/users/sign_in', data, { token })
   }).then(users_res => {
-    const form = R.pick(['client_id', 'nonce', 'response_type', 'scope', 'state'], req.body)
+    const form = R.pick(['client_id', 'nonce', 'response_type', 'redirect_uri', 'scope', 'state'], req.body)
     const headers = R.pick(['access-token', 'client', 'uid'], users_res.headers)
     return request_promise({
       form,
