@@ -14,10 +14,9 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 ROOT_DIR=$( dirname $SCRIPT_DIR )
+DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${ROOT_DIR}/deploy/docker-compose-deps.yml}
+CONTAINER_NAME=${CONTAINER_NAME:-auth-api}
 
-COMPOSE_FILE=${ROOT_DIR}/deploy/docker-compose-test.yml
-AUTH_API_IMAGE_NAME=auth-api
+CONTAINER_ID=$( docker-compose -f $COMPOSE_FILE ps -q $CONTAINER_NAME )
 
-AUTH_API_CONTAINER=$( docker-compose -f $COMPOSE_FILE ps -q $AUTH_API_IMAGE_NAME )
-
-docker exec -ti $AUTH_API_CONTAINER tail -f log/test.log
+docker exec -ti $CONTAINER_ID bin/rails "$@"

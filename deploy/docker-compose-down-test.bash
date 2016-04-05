@@ -15,9 +15,6 @@ script_dir() {
 SCRIPT_DIR=$( script_dir )
 ROOT_DIR=$( dirname $SCRIPT_DIR )
 
-COMPOSE_FILE=${ROOT_DIR}/deploy/docker-compose-test.yml
-AUTH_API_IMAGE_NAME=auth-api
+DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${SCRIPT_DIR}/docker-compose-test.yml}
 
-AUTH_API_CONTAINER=$( docker-compose -f $COMPOSE_FILE ps -q $AUTH_API_IMAGE_NAME )
-
-docker attach --sig-proxy=false $AUTH_API_CONTAINER
+${SCRIPT_DIR}/docker-compose -f $DOCKER_COMPOSE_FILE down

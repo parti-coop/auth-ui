@@ -1,6 +1,7 @@
 import axios from 'axios'
 import health_check from 'express-healthcheck'
-import { auth_api_url, users_api_url } from 'utils/parti-url'
+
+import { auth_api_url, users_api_url } from '../utils/parti-url'
 
 function applyMiddlewares(app) {
   applyHealthCheck(app)

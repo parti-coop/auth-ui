@@ -15,7 +15,7 @@ script_dir() {
 SCRIPT_DIR=$( script_dir )
 ROOT_DIR=$( dirname $SCRIPT_DIR )
 
-DOCKER_COMPOSE_FILE=${SCRIPT_DIR}/docker-compose-deps.yml
+DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${SCRIPT_DIR}/docker-compose-deps.yml}
 
 AUTH_NETWORK=auth-net
 AUTH_NETWORK_ID=$( docker network ls -f name=${AUTH_NETWORK} -q )
@@ -31,7 +31,7 @@ docker-compose -f ${DOCKER_COMPOSE_FILE} up -d auth-api
 docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm users-api bin/rails db:setup
 docker-compose -f ${DOCKER_COMPOSE_FILE} up -d users-api
 
-AUTH_API_CONTAINER=$( docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml ps -q auth-api )
+AUTH_API_CONTAINER=$( docker-compose -f ${DOCKER_COMPOSE_FILE} ps -q auth-api )
 docker network connect $AUTH_NETWORK $AUTH_API_CONTAINER
-USERS_API_CONTAINER=$( docker-compose -f ${SCRIPT_DIR}/docker-compose-test.yml ps -q users-api )
+USERS_API_CONTAINER=$( docker-compose -f ${DOCKER_COMPOSE_FILE} ps -q users-api )
 docker network connect --alias users-api $AUTH_NETWORK $USERS_API_CONTAINER

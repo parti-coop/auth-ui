@@ -14,10 +14,9 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 ROOT_DIR=$( dirname $SCRIPT_DIR )
+DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${ROOT_DIR}/deploy/docker-compose-deps.yml}
+CONTAINER_NAME=db
 
-COMPOSE_FILE=${ROOT_DIR}/deploy/docker-compose-test.yml
-DB_IMAGE_NAME=db
+CONTAINER_ID=$( docker-compose -f $DOCKER_COMPOSE_FILE ps -q $CONTAINER_NAME )
 
-DB_CONTAINER=$( docker-compose -f $COMPOSE_FILE ps -q $DB_IMAGE_NAME )
-
-docker exec -ti $DB_CONTAINER psql -U postgres
+docker exec -ti $CONTAINER_ID psql -U postgres

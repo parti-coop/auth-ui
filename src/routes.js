@@ -6,7 +6,7 @@ import {
     Authorizations,
     Home,
     NotFound,
-  } from 'containers'
+  } from './containers'
 
 export default (store) => {
   /**

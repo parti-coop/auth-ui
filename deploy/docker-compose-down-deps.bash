@@ -15,9 +15,6 @@ script_dir() {
 SCRIPT_DIR=$( script_dir )
 ROOT_DIR=$( dirname $SCRIPT_DIR )
 
-COMPOSE_FILE=${ROOT_DIR}/deploy/docker-compose-test.yml
-AUTH_API_IMAGE_NAME=auth-api
+DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${SCRIPT_DIR}/docker-compose-deps.yml}
 
-AUTH_API_CONTAINER=$( docker-compose -f $COMPOSE_FILE ps -q $AUTH_API_IMAGE_NAME )
-
-docker exec -ti $AUTH_API_CONTAINER bin/rails "$@"
+${SCRIPT_DIR}/docker-compose -f $DOCKER_COMPOSE_FILE down

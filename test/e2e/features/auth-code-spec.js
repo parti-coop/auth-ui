@@ -40,12 +40,10 @@ feature('Grant authorization code', () => {
 
     scenario('User submits credential then authorization code is granted', function *() {
       const client = yield client_exists({ redirect_uris: [ redirect_uri ] })
-
       const user = yield user_exists({
         email: 'user@email.com',
         password: 'Passw0rd!'
       })
-
       yield auth_code_is_requested(browser, {
         client_id: client.client_id,
         nonce: 'random-nonce',

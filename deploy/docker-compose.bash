@@ -14,4 +14,6 @@ script_dir() {
 
 SCRIPT_DIR=$( script_dir )
 
+DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-${ROOT_DIR}/deploy/docker-compose-deps.yml}
+
 docker-compose -f ${DOCKER_COMPOSE_FILE} "$@"
