@@ -2,6 +2,7 @@
 import { describe as feature, describe as context } from 'mocha'
 
 import '../support/setup-mocha'
+import auth_ui_test_client from '../support/features/auth-ui-test-client'
 import { CREATE_CLIENT, OPENID } from '../../../src/models/scope'
 import { access_token_is_granted } from '../support/features/token'
 import {
@@ -23,8 +24,10 @@ feature('Grant authorization code', () => {
 
   beforeEach(() => {
     browser = createBrowser()
-    return clean_auth_database().then(() => {
+    return auth_ui_test_client.delete('/v1/test/token-caches').then(() => {
       return clean_users_database()
+    }).then(() => {
+      return clean_auth_database()
     })
   })
 

@@ -21,7 +21,10 @@ import Html from './helpers/Html'
 import applyMiddleware from './middlewares'
 import config from './config'
 import getRoutes from './routes'
-import { auth_ui_client_credential_token } from './helpers/auth-client'
+import auth_client, {
+  auth_ui_client_credential_token,
+  clear_token_cache
+} from './helpers/auth-client'
 import users_client from './helpers/users-client'
 import { auth_api_url } from './utils/parti-url'
 
@@ -78,6 +81,38 @@ app.post('/v1/sign-in', sign_in_handlers, (req, res) => {
     res.end(JSON.stringify(err.data))
   })
 })
+
+if (__DEVELOPMENT__) {
+  app.delete('/v1/test/token-caches', (req, res) => {
+    if (req.headers.authorization) {
+      const matches = /^Bearer (.*)$/.exec(req.headers.authorization)
+      if (matches) {
+        const token  = matches[1]
+        auth_client.post('/v1/introspect', { token }, { token: { access_token: token } }).then(auth_res => {
+          console.log(auth_res)
+          if (auth_res.status === 200) {
+            if (!auth_res.data.active) {
+              res.writeHead(401, 'Unauthorized')
+              res.end()
+              return
+            }
+            clear_token_cache()
+          }
+          res.writeHead(auth_res.status, auth_res.statusText)
+          res.end()
+        }).catch(err => {
+          console.log(err)
+          const headers = R.pick(['content-type'], err.headers)
+          res.writeHead(err.status, err.statusText, headers)
+          res.end(JSON.stringify(err.data))
+        })
+        return
+      }
+    }
+    res.writeHead(401, 'Unauthorized')
+    res.end()
+  })
+}
 
 app.use('/ws', (req, res) => {
   proxy.web(req, res, {target: targetUrl + '/ws'})
